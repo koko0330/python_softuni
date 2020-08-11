@@ -1,0 +1,16 @@
+n = int(input())
+word = input()
+
+new_list = []
+final_list = []
+
+for _ in range(n):
+    string = input()
+    new_list.append(string)
+
+    if word in string:
+        final_list.append(string)
+
+
+print(new_list)
+print(final_list)
