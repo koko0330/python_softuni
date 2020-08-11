@@ -1,0 +1,22 @@
+n = int(input())
+
+positive_list = []
+negative_list = []
+
+count_positives = 0
+sum_negatives = 0
+
+for i in range(1, n + 1):
+    number = int(input())
+
+    if number > 0:
+        positive_list.append(number)
+        count_positives += 1
+
+    if number < 0:
+        negative_list.append(number)
+        sum_negatives += number
+
+print(positive_list)
+print(negative_list)
+print(f"Count of positives: {count_positives}. Sum of negatives: {sum_negatives}")
