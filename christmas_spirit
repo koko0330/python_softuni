@@ -1,0 +1,53 @@
+quantity = int(input())
+days = int(input())
+
+days_left_counter = 0
+total_spirit = 0
+
+ornament_set_price = 2
+total_ornament_set_price = 0
+
+tree_skirs_price = 5
+total_tree_skirt_price = 0
+
+tree_garlands_price = 3
+total_tree_garlands_price = 0
+
+tree_lights_price = 15
+total_tree_light_price = 0
+
+while days > 0:
+    days -= 1
+    days_left_counter += 1
+
+    if days_left_counter % 11 == 0:
+        quantity += 2
+
+    if days_left_counter % 2 == 0:
+        total_ornament_set_price += ornament_set_price * quantity
+        total_spirit += 5
+
+    if days_left_counter % 3 == 0:
+        total_tree_skirt_price += tree_skirs_price * quantity
+        total_tree_garlands_price += tree_garlands_price * quantity
+        total_spirit += 13
+
+    if days_left_counter % 5 == 0:
+        total_tree_light_price += tree_lights_price * quantity
+        total_spirit += 17
+
+    if days_left_counter % 10 == 0:
+        total_spirit -= 20
+        total_tree_skirt_price += tree_skirs_price
+        total_tree_garlands_price += tree_garlands_price
+        total_tree_light_price += tree_lights_price
+
+    if days_left_counter % 15 == 0:
+        total_spirit += 30
+
+    if days_left_counter % 10 == 0 and days == 0:
+        total_spirit -= 30
+
+budget = total_ornament_set_price + total_tree_garlands_price + total_tree_skirt_price + total_tree_light_price
+print(f"Total cost: {budget}")
+print(f"Total spirit: {total_spirit}")
