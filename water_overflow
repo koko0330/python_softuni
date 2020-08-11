@@ -1,0 +1,15 @@
+n = int(input())
+
+water_tank_capacity = 255
+final_capacity = 0
+
+for capacity in range(n):
+    pour = int(input())
+    final_capacity += pour
+
+    if final_capacity > water_tank_capacity:
+        print("Insufficient capacity!")
+        final_capacity -= pour
+        continue
+
+print(final_capacity)
