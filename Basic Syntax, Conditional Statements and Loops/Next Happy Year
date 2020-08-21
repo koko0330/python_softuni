@@ -1,0 +1,16 @@
+year = int(input())
+
+n1 = year // 1000
+n2 = year // 100 % 10
+n3 = year // 10 % 10
+n4 = year // 1 % 10
+
+for i in range(year + 1, 9999):
+    happy_year = i
+    num1 = happy_year // 1000
+    num2 = happy_year // 100 % 10
+    num3 = happy_year // 10 % 10
+    num4 = happy_year // 1 % 10
+    if num1 != num2 and num1 != num3 and num1 != num4 and num2 != num1 and num2 != num3 and num2 != num4 and num3 != num1 and num3 != num2 and num3 != num4 and num4 != num1 and num4 != num2 and num4 != num3:
+        print(happy_year)
+        break
