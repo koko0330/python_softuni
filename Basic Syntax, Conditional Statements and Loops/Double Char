@@ -1,0 +1,6 @@
+string = input()
+
+length = len(string)
+
+for i in range(length):
+    print(f"{string[i]}{string[i]}", end="")
