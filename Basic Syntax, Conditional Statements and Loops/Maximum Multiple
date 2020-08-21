@@ -1,0 +1,10 @@
+divider = int(input())
+bound = int(input())
+
+max_n = 0
+
+for n in range(bound + 1):
+    if n % divider == 0 and 0 < n <= bound:
+        if n > max_n:
+            max_n = n
+print(max_n)
