@@ -1,0 +1,8 @@
+rows_count = int(input())
+
+years_count = rows_count * 100
+days_count = int(years_count * 365.2422)
+hours_count = days_count * 24
+minutes_count = hours_count * 60
+
+print(f"{rows_count} centuries = {years_count} years = {days_count} days = {hours_count} hours = {minutes_count} minutes")
