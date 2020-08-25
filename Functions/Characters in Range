@@ -1,0 +1,13 @@
+def return_string(first_letter, second_letter):
+    final_string = ''
+    first = ord(first_letter)
+    second = ord(second_letter)
+
+    for i in range(first + 1, second):
+        final_string += chr(i)
+    return final_string
+
+
+first_letter = input()
+second_letter = input()
+print(" ".join(return_string(first_letter, second_letter)))
