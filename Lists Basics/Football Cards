@@ -1,0 +1,24 @@
+card = input()
+
+card_list = card.split(" ")
+
+team_one = ['A-1', 'A-2', 'A-3', 'A-4', 'A-5', 'A-6', 'A-7', 'A-8', 'A-9', 'A-10', 'A-11']
+team_two = ['B-1', 'B-2', 'B-3', 'B-4', 'B-5', 'B-6', 'B-7', 'B-8', 'B-9', 'B-10', 'B-11']
+
+team_one_count = 11
+team_two_count = 11
+
+for i in card_list:
+    if i in team_one:
+        team_one.remove(i)
+        team_one_count -= 1
+
+for j in card_list:
+    if j in team_two:
+        team_two.remove(j)
+        team_two_count -= 1
+
+print(f"Team A - {team_one_count}; Team B - {team_two_count}")
+
+if team_one_count < 7 or team_two_count < 7:
+    print("Game was terminated")
