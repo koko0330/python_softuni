@@ -1,0 +1,19 @@
+def is_a_palindrome(list_of_integers):
+    len_list = len(list_of_integers)
+    for i in range(len_list):
+        temp = int(list_of_integers[i])
+        n = temp
+        rev = 0
+        while n > 0:
+            dig = n % 10
+            rev = rev * 10 + dig
+            n = n // 10
+        if temp == rev:
+            print(True)
+        else:
+            print(False)
+    return ''
+
+
+list_of_integers = input().split(", ")
+print(is_a_palindrome(list_of_integers))
