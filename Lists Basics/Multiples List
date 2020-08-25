@@ -1,0 +1,16 @@
+factor = int(input())
+count = int(input())
+
+final_list = []
+
+new_number = 0
+max_number = 0
+
+for i in range(count):
+    number = 0 + factor
+    max_number += number
+    if max_number >= number:
+        new_number = max_number
+        final_list.append(new_number)
+
+print(final_list)
