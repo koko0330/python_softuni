@@ -1,0 +1,20 @@
+cards_deck = input().split()
+faro_shuffles = int(input())
+
+middle_length = len(cards_deck) // 2
+
+for i in range(faro_shuffles):
+
+    res = []
+
+    for index in range(middle_length):
+        first_card = cards_deck[index]
+
+        current_index_second_deck = index + middle_length
+        second_card = cards_deck[index + middle_length]
+        res.append(first_card)
+        res.append(second_card)
+
+    cards_deck = res
+
+print(cards_deck)
