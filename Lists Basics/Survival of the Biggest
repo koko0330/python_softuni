@@ -1,0 +1,25 @@
+string_integers = input().split()
+numbers_to_remove = int(input())
+
+initial_list = []
+
+number = 0
+
+for num in range(len(string_integers)):
+    number = int(string_integers[num])
+    initial_list.append(number)
+
+min_number = 7897978978967895789
+
+for j in range(numbers_to_remove):
+
+    for i in range(len(initial_list)):
+        min_num = initial_list[i]
+
+        if min_num < min_number:
+            min_number = min_num
+
+    initial_list.remove(min_number)
+    min_number = 7897978978967895789
+
+print(initial_list)
