@@ -1,0 +1,21 @@
+def loading_bar(n):
+    final_list = []
+    final_string = ''
+    number = n // 10
+    final_string += "["
+    final_string += "%" * number
+    rest = 10 - number
+    final_string += "." * rest
+    final_string += "]"
+
+    if "." in final_string:
+        print(f"{n}% {final_string}")
+        print("Still loading...")
+    else:
+        print("100% Complete!")
+        print(final_string)
+    return ''
+
+
+n = int(input())
+print(loading_bar(n))
