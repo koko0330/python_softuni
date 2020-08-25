@@ -1,0 +1,9 @@
+total_beggars = list(map(int, input().split(', ')))
+beggars = int(input())
+ 
+result = [0] * beggars
+for i in range(len(total_beggars)):
+    index = i % beggars
+    result[index] += total_beggars[i]
+ 
+print(result)
