@@ -1,0 +1,26 @@
+n = int(input())
+
+
+def sum_of_all_odd_numbers(n):
+    odd_sum = 0
+    n_len = len(str(n))
+    for j in range(n_len):
+        n = str(n)
+        number = int(n[j])
+        if number % 2 != 0:
+            odd_sum += number
+    return odd_sum
+
+
+def sum_of_even_numbers(n):
+    even_sum = 0
+    n_len = len(str(n))
+    for i in range(n_len):
+        n = str(n)
+        number = int(n[i])
+        if number % 2 == 0:
+            even_sum += number
+    return even_sum
+
+
+print(f"Odd sum = {sum_of_all_odd_numbers(n)}, Even sum = {sum_of_even_numbers(n)}")
