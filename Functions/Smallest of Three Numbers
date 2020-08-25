@@ -1,0 +1,13 @@
+def smallest_number(a, b, c):
+    if a < b and a < c:
+        return a
+    if b < a and b < c:
+        return b
+    if c < b and c < a:
+        return c
+
+
+a = int(input())
+b = int(input())
+c = int(input())
+print(smallest_number(a, b, c))
