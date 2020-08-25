@@ -1,0 +1,15 @@
+string = input()
+
+first_list = string.split(" ")
+
+for i in range(len(first_list)):
+    first_list[i] = int(first_list[i])
+
+number = 0
+final_list = []
+
+for j in range(len(first_list)):
+    number = first_list[j] * -1
+    final_list.append(number)
+
+print(final_list)
