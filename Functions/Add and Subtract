@@ -1,0 +1,14 @@
+a = int(input())
+b = int(input())
+c = int(input())
+
+
+def sum_numbers(a, b):
+    return a + b
+
+
+def subtract(c):
+    return (a + b) - c
+
+
+print(subtract(c))
