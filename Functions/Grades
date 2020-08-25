@@ -1,0 +1,15 @@
+def grade_text(n):
+    if 2.00 <= n < 3.0:
+        return 'Fail'
+    if 3.00 <= n < 3.50:
+        return 'Poor'
+    if 3.50 <= n < 4.450:
+        return 'Good'
+    if 4.50 <= n < 5.50:
+        return 'Very Good'
+    if 5.50 <= n <= 6.00:
+        return 'Excellent'
+
+
+n = float(input())
+print(grade_text(n))
