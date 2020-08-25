@@ -1,0 +1,41 @@
+num_one = int(input())
+num_two = int(input())
+
+
+def factorial_num_one(num_one):
+    res_one = 0
+    temp_res = 0
+    if num_one <= 2:
+        res_one = num_one
+    for i in range(num_one, 2, -1):
+        if temp_res == 0:
+            temp_res = i * (i - 1)
+            res_one = temp_res
+        else:
+            res_one = res_one * (i - 1)
+
+    return res_one
+
+
+def factorial_num_two(num_two):
+    res_two = 0
+    temp_res = 0
+    if num_two <= 2:
+        res_two = num_two
+    for i in range(num_two, 2, -1):
+        if temp_res == 0:
+            temp_res = i * (i - 1)
+            res_two = temp_res
+        else:
+            res_two = res_two * (i - 1)
+
+    return res_two
+
+
+def final_result(num_one, num_two):
+    final = factorial_num_one(num_one) // factorial_num_two(num_two)
+
+    return final
+
+
+print(f"{final_result(num_one, num_two):.2f}")
