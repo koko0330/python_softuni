@@ -1,0 +1,16 @@
+tasks = []
+
+command = ''
+
+while command != "End":
+    command = input()
+    if command == "End":
+        break
+    else:
+        command = command.split("-")
+        importance = int(command[0])
+        value = command[1]
+        tasks.append((importance, value))
+
+tasks_in_priority = [task_name for importance, task_name in sorted(tasks)]
+print(tasks_in_priority)
