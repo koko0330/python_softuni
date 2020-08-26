@@ -1,0 +1,15 @@
+first_list = input().split(", ")
+second_list = input().split(", ")
+
+final_list = []
+
+match_found = False
+
+for i in first_list:
+    for j in second_list:
+        if i in j:
+            final_list.append(i)
+            match_found = True
+
+final_list = list(dict.fromkeys(final_list))
+print(final_list)
