@@ -1,0 +1,4 @@
+line_of_numbers = input().split(" ")
+
+final_list = list(reversed(sorted(line_of_numbers)))
+print("".join(final_list))
