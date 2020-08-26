@@ -1,0 +1,12 @@
+employees_happiness = [int(n) for n in input().split(" ")]
+factor = int(input())
+factored_employees_happiness = [v * factor for v in employees_happiness]
+average_happiness = sum(factored_employees_happiness) / len(factored_employees_happiness)
+happy_values = list(filter(lambda n: n >= average_happiness, factored_employees_happiness))
+happy_count = len(happy_values)
+total_count = len(employees_happiness)
+
+if happy_count >= (len(employees_happiness) / 2):
+    print(f"Score: {happy_count}/{total_count}. Employees are happy!")
+else:
+    print(f"Score: {happy_count}/{total_count}. Employees are not happy!")
