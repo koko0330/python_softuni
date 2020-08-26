@@ -1,0 +1,29 @@
+wagons_count = int(input())
+
+command = ''
+
+initial_list = [0] * wagons_count
+
+list_command = []
+
+
+while command != "End":
+    command = input()
+    if "add" in command:
+        list_command = command.split(" ")
+        people_count = int(list_command[1])
+        initial_list[-1] += people_count
+
+    elif "insert" in command:
+        list_command = command.split(" ")
+        index = int(list_command[1])
+        people_count = int(list_command[2])
+        initial_list[index] += people_count
+
+    elif "leave" in command:
+        list_command = command.split(" ")
+        index = int(list_command[1])
+        people_count = int(list_command[2])
+        initial_list[index] -= people_count
+
+print(initial_list)
