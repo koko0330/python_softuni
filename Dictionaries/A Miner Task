@@ -1,0 +1,19 @@
+command = ''
+
+dictionary = {}
+
+
+while command != "Stop":
+    command = input()
+    if command == "stop":
+        break
+
+    if command not in dictionary:
+        dictionary[command] = int(input())
+    else:
+        dictionary[command] += int(input())
+
+
+if command == "stop":
+    for key, value in dictionary.items():
+        print(f"{key} -> {value}")
