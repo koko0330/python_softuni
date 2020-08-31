@@ -1,0 +1,13 @@
+text = input()
+
+dictionary = {}
+
+for char in text:
+    if char not in dictionary and char != " ":
+        dictionary[char] = 0
+
+    if char in dictionary and char != " ":
+        dictionary[char] += 1
+
+for key, value in dictionary.items():
+    print(f"{key} -> {value}")
