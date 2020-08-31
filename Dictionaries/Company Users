@@ -1,0 +1,26 @@
+line = input()
+
+company_dict = {}
+
+while line != "End":
+    line = line.split(" -> ")
+    company = line[0]
+    employee = line[1]
+
+    if company not in company_dict:
+        company_dict[company] = []
+        company_dict[company].append(employee)
+    else:
+        if employee in company_dict[company]:
+            line = input()
+            continue
+        company_dict[company].append(employee)
+    line = input()
+
+company_dict = dict(sorted(company_dict.items(), key=lambda x: x[0]))
+
+for company, employee in company_dict.items():
+    print(f"{company}")
+
+    for empl in employee:
+        print(f"-- {empl}")
