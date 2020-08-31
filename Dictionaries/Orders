@@ -1,0 +1,27 @@
+line = input()
+
+products = {}
+
+while line != "buy":
+    line = line.split()
+    product = line [0]
+    price = float(line[1])
+    quantity = int(line[2])
+
+    if product not in products:
+        products[product] = []
+        products[product].append(price)
+        products[product].append(quantity)
+
+    elif product in products:
+        old_quantity = int(products[product][1])
+        products[product] = []
+        products[product].append(price)
+        products[product].append(quantity)
+        products[product][1] += old_quantity
+
+    line = input()
+
+for product, price in products.items():
+    products_total = products[product][0] * products[product][1]
+    print(f"{product} -> {products_total:.2f}")
