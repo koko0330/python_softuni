@@ -1,0 +1,34 @@
+key_materials = {
+    'shards': 0,
+    'fragments': 0,
+    'motes': 0
+}
+junk = {}
+something_Obtained = False
+while something_Obtained is False:
+    mining = input().split(' ')
+    for items in range(0, len(mining), 2):
+        quantity = int(mining[items])
+        item = mining[items+1].lower()
+        if item in key_materials:
+            key_materials[item] += quantity
+            if key_materials[item] >= 250:
+                if item == 'shards':
+                    print(f"Shadowmourne obtained!")
+                elif item == 'fragments':
+                    print("Valanyr obtained!")
+                else:
+                    print("Dragonwrath obtained!")
+                key_materials[item] -= 250
+                something_Obtained = True
+                break
+        else:
+            if item not in junk:
+                junk[item] = 0
+            junk[item] += quantity
+sorted_materials = dict(sorted(key_materials.items(), key= lambda x: (-x[1], x[0])))
+sorted_junk = dict(sorted(junk.items(), key= lambda a: a[0]))
+for key, value in sorted_materials.items():
+    print(f"{key}: {value}")
+for key, value in sorted_junk.items():
+    print(f"{key}: {value}")
