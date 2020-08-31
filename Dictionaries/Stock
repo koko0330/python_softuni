@@ -1,0 +1,19 @@
+data = input()
+elements = data.split(" ")
+
+products = {}
+
+for index in range(0, len(elements), 2):
+    product_name = elements[index]
+    product_quantity = int(elements[index + 1])
+    products[product_name] = product_quantity
+
+
+search_products = input().split(" ")
+
+for product in search_products:
+    if product in products:
+        quantity = products[product]
+        print(f"We have {quantity} of {product} left")
+    else:
+        print(f"Sorry, we don't have {product}")
