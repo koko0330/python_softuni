@@ -1,0 +1,10 @@
+foods_and_quantities = input().split()
+
+products = {}
+
+for index in range(0, len(foods_and_quantities), 2):
+    product_name = foods_and_quantities[index]
+    product_quantity = int(foods_and_quantities[index + 1])
+    products[product_name] = product_quantity
+
+print(products)
