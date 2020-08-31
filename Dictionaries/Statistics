@@ -1,0 +1,21 @@
+from collections import defaultdict
+
+products = defaultdict(int)
+
+
+while True:
+    command = input()
+    if command == "statistics":
+        break
+    command = command.split(": ")
+    product_name = command[0]
+    quantity = int(command[1])
+    products[product_name] += quantity
+
+
+print("Products in stock:")
+for product_name, quantity in products.items():
+    print(f"- {product_name}: {quantity}")
+
+print(f"Total Products: {len(products.keys())}")
+print(f"Total Quantity: {sum(products.values())}")
