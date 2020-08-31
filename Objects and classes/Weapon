@@ -1,0 +1,14 @@
+class Weapon:
+    def __init__(self, amount_of_bullets):
+        self.amount_of_bullets = amount_of_bullets
+
+    def shoot(self):
+
+        if self.amount_of_bullets > 0:
+            self.amount_of_bullets -= 1
+            return "shooting..."
+
+        return "no bullets left"
+
+    def __repr__(self):
+        return f"Remaining bullets: {self.amount_of_bullets}"
