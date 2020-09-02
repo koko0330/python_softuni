@@ -1,0 +1,9 @@
+command = input().split()
+
+final_sring = ''
+
+for string in command:
+    string *= int(len(string))
+    final_sring += string
+
+print(final_sring)
