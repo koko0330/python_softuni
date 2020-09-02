@@ -1,0 +1,15 @@
+chr_one = input()
+chr_two = input()
+string = input()
+
+
+start = ord(chr_one)
+end = ord(chr_two)
+
+total_sum = 0
+
+for element in string:
+    if start < ord(element) < end:
+        total_sum += ord(element)
+
+print(total_sum )
