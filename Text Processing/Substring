@@ -1,0 +1,8 @@
+first_string = input()
+second_string = input()
+
+for string in second_string:
+    if first_string in second_string:
+        second_string = second_string.replace(first_string, "")
+
+print(second_string)
