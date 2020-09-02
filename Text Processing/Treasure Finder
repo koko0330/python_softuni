@@ -1,0 +1,57 @@
+key = list(map(int, input().split()))
+
+command = ''
+
+new_line = ''
+iteration = 0
+length = 0
+start_index_material = 0
+end_index_material = 0
+start_index_coordinates = 0
+end_index_coordinates = 0
+and_found = 0
+
+
+while "find" not in command:
+    command = input()
+
+    if "find" in command:
+        break
+
+    new_line = ''
+    iteration = 0
+    length = 0
+
+    while length < len(command):
+        for i in command:
+            element = ord(i)
+            new_line += chr(element - key[iteration])
+            iteration += 1
+            length += 1
+            if iteration >= len(key):
+                iteration = 0
+                length += 1
+
+        for j, v in enumerate(new_line):
+
+
+            if v == "&" and and_found == 0:
+                start_index_material = j + 1
+                and_found += 1
+            elif v == "&" and and_found > 0:
+                end_index_material = j
+
+            if v == "<":
+                start_index_coordinates = j + 1
+            elif v == ">":
+                end_index_coordinates = j
+
+        found_material = new_line[start_index_material:end_index_material]
+        found_coordinates = new_line[start_index_coordinates:end_index_coordinates]
+        print(f"Found {found_material} at {found_coordinates}")
+
+        start_index_material = 0
+        end_index_material = 0
+        start_index_coordinates = 0
+        end_index_coordinates = 0
+        and_found = 0
