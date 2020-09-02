@@ -1,0 +1,15 @@
+import re
+
+text = input()
+
+pattern = r'(\b_[a-zA-Z]+\b|\b_[0-9]+\b)'
+
+matches = re.findall(pattern, text)
+
+final_list = []
+
+for match in matches:
+    if "_" in match:
+        match = match.replace("_", "")
+        final_list.append(match)
+print(",".join(final_list))
