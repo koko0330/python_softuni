@@ -1,0 +1,21 @@
+string = input()
+
+characeters = []
+digits = []
+others = []
+
+for char in string:
+    if char.isdigit():
+        digits.append(char)
+    elif char.isalpha():
+        characeters.append(char)
+    else:
+        others.append(char)
+
+
+characeters = "".join(characeters)
+digits = "".join(digits)
+others = "".join(others)
+print(digits)
+print(characeters)
+print(others)
