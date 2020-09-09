@@ -1,0 +1,28 @@
+integers_sequence = list(map(int, input().split()))
+
+average_number = sum(integers_sequence) / len(integers_sequence)
+
+final_list = []
+
+for num in integers_sequence:
+    if num > average_number:
+        final_list.append(num)
+
+
+if len(final_list) > 5:
+    final_list = sorted(final_list)
+    final_list = final_list[::-1]
+    final_list = final_list[0:5]
+    final_list = list(map(str, final_list))
+    final_list = " ".join(final_list)
+    print(final_list)
+
+elif 0 < len(final_list) <= 5:
+    final_list = sorted(final_list)
+    final_list = final_list[::-1]
+    final_list = list(map(str, final_list))
+    final_list = " ".join(final_list)
+    print(final_list)
+
+elif len(final_list) == 0:
+    print("No")
