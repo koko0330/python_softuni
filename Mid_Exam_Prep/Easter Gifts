@@ -1,0 +1,37 @@
+gift_plan = input().split()
+
+command = ''
+
+while command != "No Money":
+    command = input().split()
+
+    if "No" and "Money" in command:
+        break
+
+    elif "OutOfStock" in command:
+        gift = command[1]
+        for i, v in enumerate(gift_plan):
+            if v == gift:
+                gift_plan[i] = "None"
+
+    elif "Required" in command:
+        gift = command[1]
+        index = int(command[2])
+
+        if 0 <= index < len(gift_plan):
+            gift_plan.pop(index)
+            gift_plan.insert(index, gift)
+
+    elif "JustInCase" in command:
+        gift = command[1]
+        last_index = len(gift_plan) - 1
+        gift_plan.pop(last_index)
+        gift_plan.append(gift)
+
+
+if "No" and "Money" in command:
+    for gift in gift_plan:
+        if "None" in gift_plan:
+            gift_plan.remove("None")
+    gift_plan = " ".join(gift_plan)
+    print(gift_plan)
