@@ -1,0 +1,50 @@
+cards = input().split(":")
+
+command = ''
+
+deck = []
+
+while command != "Ready":
+    command = input().split()
+    action = command[0]
+
+    if action == "Ready":
+        break
+
+    elif action == "Add":
+        card_name = command[1]
+        if card_name in cards:
+            deck.append(card_name)
+        else:
+            print("Card not found.")
+
+    elif action == "Insert":
+        card_name = command[1]
+        index = int(command[2])
+        if card_name in cards and 0 <= index < len(deck):
+            deck.insert(index, card_name)
+        else:
+            print("Error!")
+
+    elif action == "Remove":
+        card_name = command[1]
+        if card_name in deck:
+            deck.remove(card_name)
+        else:
+            print("Card not found.")
+
+    elif action == "Swap":
+        card_name_one = command[1]
+        card_name_two = command[2]
+        for i, v in enumerate(deck):
+            if v == card_name_one:
+                deck[i] = card_name_two
+            elif v == card_name_two:
+                deck[i] = card_name_one
+
+    elif action == "Shuffle":
+        deck = deck[::-1]
+
+if action == "Ready":
+    deck = " ".join(deck)
+    print(deck)
