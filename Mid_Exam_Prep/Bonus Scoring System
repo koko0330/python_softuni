@@ -1,0 +1,21 @@
+from math import ceil
+
+count_of_students = int(input())
+count_of_lecturers = int(input())
+initial_bonus = int(input())
+
+max_bonus = 0
+max_attendances = 0
+student_bonus = 0
+
+for attendance in range(count_of_students):
+    count_of_attendances = int(input())
+    student_bonus = (count_of_attendances / count_of_lecturers) * (5 + initial_bonus)
+
+    if student_bonus > max_bonus:
+        max_bonus = student_bonus
+        max_attendances = count_of_attendances
+
+max_bonus = ceil(max_bonus)
+print(f"Max Bonus: {max_bonus}.")
+print(f"The student has attended {max_attendances} lectures.")
