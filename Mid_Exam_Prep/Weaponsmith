@@ -1,0 +1,44 @@
+name_of_the_weapon = input().split("|")
+
+command = ''
+
+while command != "Done":
+    command = input().split()
+    action = command[0]
+
+    if action == "Done":
+        break
+
+    if "Move" and "Left" in command:
+        index = int(command[2])
+        if 0 <= index < len(name_of_the_weapon) and index - 1 >= 0:
+            element = name_of_the_weapon[index]
+            name_of_the_weapon.pop(index)
+            name_of_the_weapon.insert(index - 1, element)
+
+    elif "Move" and "Right" in command:
+        index = int(command[2])
+        if 0 <= index < len(name_of_the_weapon) and index + 1 < len(name_of_the_weapon):
+            element = name_of_the_weapon[index]
+            name_of_the_weapon.pop(index)
+            name_of_the_weapon.insert(index + 1, element)
+
+    elif "Check" and "Odd" in command:
+        list_odds = []
+        for i, v in enumerate(name_of_the_weapon):
+            if i % 2 != 0:
+                list_odds.append(v)
+        list_odds = " ".join(list_odds)
+        print(list_odds)
+
+    elif "Check" and "Even" in command:
+        list_evens = []
+        for i, v in enumerate(name_of_the_weapon):
+            if i % 2 == 0:
+                list_evens.append(v)
+        list_evens = " ".join(list_evens)
+        print(list_evens)
+
+if action == "Done":
+    name_of_the_weapon = "".join(name_of_the_weapon)
+    print(f"You crafted {name_of_the_weapon}!")
