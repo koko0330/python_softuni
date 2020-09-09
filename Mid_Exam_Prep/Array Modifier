@@ -1,0 +1,38 @@
+integers_array = list(map(int, input().split()))
+
+command = ''
+
+while command != "end":
+    command = input().split()
+    if "end" in command:
+        break
+
+    elif "swap" in command:
+        index_one = int(command[1])
+        index_two = int(command[2])
+
+        if 0 <= index_one < len(integers_array) and 0 <= index_two < len(integers_array):
+            num_one = integers_array[index_one]
+            num_two = integers_array[index_two]
+            for i,v in enumerate(integers_array):
+                if v == num_one:
+                    integers_array[index_one] = num_two
+
+                elif v == num_two:
+                    integers_array[index_two] = num_one
+
+    elif "multiply" in command:
+        index_one = int(command[1])
+        index_two = int(command[2])
+
+        if 0 <= index_one < len(integers_array) and 0 <= index_two < len(integers_array):
+            integers_array[index_one] *= integers_array[index_two]
+
+    elif "decrease" in command:
+        integers_array = [num - 1 for num in integers_array if num in integers_array]
+
+
+if "end" in command:
+    integers_array = list(map(str, integers_array))
+    integers_array = ", ".join(integers_array)
+    print(integers_array)
