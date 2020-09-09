@@ -1,0 +1,22 @@
+people_employee_one = int(input())
+people_employee_two = int(input())
+people_employee_three = int(input())
+total_people_count = int(input())
+
+
+total_people_per_hour = people_employee_one + people_employee_two + people_employee_three
+
+hour = 0
+
+while total_people_count > 0:
+    total_people_count -= total_people_per_hour
+
+    if hour % 4 == 0:
+        total_people_count += total_people_per_hour
+
+    if total_people_count <= 0:
+        break
+
+    hour += 1
+
+print(f"Time needed: {hour}h.")
