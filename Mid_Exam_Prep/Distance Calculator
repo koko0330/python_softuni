@@ -1,0 +1,15 @@
+steps_made = int(input())
+step_longitude = float(input()) # cm
+distance_to_travel = int(input()) # meters
+
+travelled_distance_cm = 0
+
+for step in range(1, steps_made + 1):
+    if step % 5 == 0:
+        travelled_distance_cm += step_longitude * 0.70
+    else:
+        travelled_distance_cm += step_longitude
+
+travelled_distance_m = travelled_distance_cm / 100
+percentage = travelled_distance_m / distance_to_travel * 100
+print(f"You travelled {percentage:.2f}% of the distance!")
