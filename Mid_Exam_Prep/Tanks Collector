@@ -1,0 +1,46 @@
+vehicles_list = input().split(", ")
+number_of_commands = int(input())
+
+for cmd in range(number_of_commands):
+    command = input().split(", ")
+    action = command[0]
+
+    if action == "Add":
+        tank_name = command[1]
+        if tank_name in vehicles_list:
+            print("Tank is already bought")
+        else:
+            vehicles_list.append(tank_name)
+            print("Tank successfully bought")
+
+    elif action == "Remove":
+        tank_name = command[1]
+        if tank_name in vehicles_list:
+            print("Tank successfully sold")
+            vehicles_list.remove(tank_name)
+        else:
+            print("Tank not found")
+
+    elif action == "Remove At":
+        index = int(command[1])
+        if 0 <= index < len(vehicles_list):
+            vehicles_list.pop(index)
+            print("Tank successfully sold")
+        else:
+            print("Index out of range")
+
+    elif action == "Insert":
+        index = int(command[1])
+        tank_name = command[2]
+        if 0 <= index < len(vehicles_list) and tank_name not in vehicles_list:
+            vehicles_list.insert(index, tank_name)
+            print("Tank successfully bought")
+
+        elif not 0 <= index < len(vehicles_list):
+            print("Index out of range")
+
+        elif tank_name in vehicles_list:
+            print("Tank is already bought")
+
+vehicles_list = ", ".join(vehicles_list)
+print(vehicles_list)
