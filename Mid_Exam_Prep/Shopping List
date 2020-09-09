@@ -1,0 +1,36 @@
+groceries_list = input().split("!")
+
+command = ''
+
+while command != "Go Shopping!":
+    command = input().split()
+    action = command[0]
+    if action == "Go":
+        break
+
+    elif action == "Urgent":
+        item = command[1]
+        if item not in groceries_list:
+            groceries_list.insert(0, item)
+
+    elif action == "Unnecessary":
+        item = command[1]
+        if item in groceries_list:
+            groceries_list.remove(item)
+
+    elif action == "Correct":
+        old_item = command[1]
+        new_item = command[2]
+        if old_item in groceries_list:
+            for i, v in enumerate(groceries_list):
+                if v == old_item:
+                    groceries_list[i] = new_item
+
+    elif action == "Rearrange":
+        item = command[1]
+        if item in groceries_list:
+            groceries_list.remove(item)
+            groceries_list.append(item)
+
+if action == "Go":
+    print(", ".join(groceries_list))
