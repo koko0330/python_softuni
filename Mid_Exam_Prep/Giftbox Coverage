@@ -1,0 +1,16 @@
+side_size = float(input())
+sheets_paper_count = int(input())
+sheet_area = float(input())
+
+gift_box_area = (side_size * side_size) * 6
+
+total_sheet_area = 0
+
+for sheet in range(1, sheets_paper_count + 1):
+    if sheet % 3 == 0:
+        total_sheet_area += sheet_area * 0.25
+    else:
+        total_sheet_area += sheet_area
+
+percentage = (total_sheet_area / gift_box_area) * 100
+print(f"You can cover {percentage:.2f}% of the box.")
