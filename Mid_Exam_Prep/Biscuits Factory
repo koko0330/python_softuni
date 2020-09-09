@@ -1,0 +1,29 @@
+from math import floor
+
+biscuits_per_day_per_worker = int(input())
+workers_count = int(input())
+biscuits_per_month_competitors = int(input())
+
+busciuts_produced = 0
+
+for day in range(1, 31):
+    biscuits_produced_per_day = biscuits_per_day_per_worker * workers_count
+
+    if day % 3 == 0:
+        biscuits_produced_per_day = floor(biscuits_produced_per_day * 0.75)
+        busciuts_produced += biscuits_produced_per_day
+    else:
+        busciuts_produced += biscuits_produced_per_day
+
+
+print(f"You have produced {busciuts_produced} biscuits for the past month.")
+
+difference = busciuts_produced - biscuits_per_month_competitors
+
+if difference < 0:
+    difference_percentage = abs(difference) / biscuits_per_month_competitors * 100
+    print(f"You produce {difference_percentage:.2f} percent less biscuits.")
+
+elif difference > 0:
+    difference_percentage = difference / biscuits_per_month_competitors * 100
+    print(f"You produce {difference_percentage:.2f} percent more biscuits.")
