@@ -1,0 +1,38 @@
+string_of_integers = list(map(int, input().split("@")))
+
+command = ''
+
+had_valantines_counter = 0
+index = 0
+
+while command != "Love!":
+    command = input()
+
+    if command == "Love!":
+        break
+
+    action = command.split(" ")
+    last_index = int(action[1])
+    index += last_index
+
+    if index >= len(string_of_integers):
+        index = 0
+
+    string_of_integers[index] -= 2
+
+    if string_of_integers[index] < 0:
+        string_of_integers[index] = 0
+        print(f"Place {index} already had Valentine's day.")
+
+    elif string_of_integers[index] == 0:
+        had_valantines_counter += 1
+        print(f"Place {index} has Valentine's day.")
+
+if command == "Love!":
+    print(f"Cupid's last position was {index}.")
+
+if had_valantines_counter == len(string_of_integers):
+    print("Mission was successful.")
+else:
+    missed_houses = len(string_of_integers) - had_valantines_counter
+    print(f"Cupid has failed {missed_houses} places.")
