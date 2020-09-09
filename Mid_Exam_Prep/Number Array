@@ -1,0 +1,52 @@
+nums_array = list(map(int, input().split()))
+
+command = ''
+
+while command != "End":
+    command = input()
+
+    if "End" in command:
+        break
+
+    command = command.split()
+
+    if "Switch" in command:
+        index = int(command[1])
+        if 0 <= index < len(nums_array):
+            nums_array[index] *= -1
+
+    elif "Change" in command:
+        index = int(command[1])
+        value = int(command[2])
+        if 0 <= index < len(nums_array):
+            nums_array[index] = value
+
+    elif "Sum" and "Negative" in command:
+        sum_negative = 0
+        for num in nums_array:
+            if num < 0:
+                sum_negative += num
+
+        print(sum_negative)
+
+    elif "Sum" and "Positive" in command:
+        sum_positive = 0
+        for num in nums_array:
+            if num > 0:
+                sum_positive += num
+
+        print(sum_positive)
+
+    elif "Sum" and "All" in command:
+        print(sum(nums_array))
+
+
+if "End" in command:
+    final_list = []
+    for num in nums_array:
+        if num >= 0:
+            final_list.append(num)
+
+    final_list = list(map(str, final_list))
+    final_list = " ".join(final_list)
+    print(final_list)
