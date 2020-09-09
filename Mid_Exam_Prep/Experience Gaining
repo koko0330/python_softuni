@@ -1,0 +1,27 @@
+needed_experience = int(input())
+battles_count = int(input())
+
+experience_gained = 0
+battles_won = 0
+
+for battle in range(1, battles_count + 1):
+    battle_experience = int(input())
+    experience_gained += battle_experience
+
+    if battle % 3 == 0:
+        experience_gained += battle_experience * 0.15
+
+    elif battle % 5 == 0:
+        experience_gained -= battle_experience * 0.10
+
+    if needed_experience - experience_gained <= 0:
+        battles_won += 1
+        break
+
+    battles_won += 1
+
+if needed_experience - experience_gained <= 0:
+    print(f"Player successfully collected his needed experience for {battles_won} battles.")
+else:
+    left_experience = needed_experience - experience_gained
+    print(f"Player was not able to collect the needed experience, {left_experience:.2f} more needed.")
