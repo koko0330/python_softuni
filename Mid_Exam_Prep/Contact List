@@ -1,0 +1,40 @@
+contacts = input().split()
+
+command = ''
+
+while True:
+    command = input().split()
+    if "Print" in command:
+        break
+
+    elif "Add" in command:
+        contact = command[1]
+        index = int(command[2])
+
+        if contact not in contacts:
+            contacts.append(contact)
+
+        elif contact in contacts and 0 <= index < len(contacts):
+            contacts.insert(index, contact)
+
+    elif "Remove" in command:
+        index = int(command[1])
+        if 0 <= index < len(contacts):
+            contact_to_remove = contacts[index]
+            contacts.remove(contact_to_remove)
+
+    elif "Export" in command:
+        start_index = int(command[1])
+        count = int(command[2])
+        print(*contacts[start_index:start_index + count])
+
+if "Print" in command:
+
+    if "Reversed" in command:
+        contacts = contacts[::-1]
+        contacts = " ".join(contacts)
+        print(f"Contacts: {contacts}")
+
+    elif "Normal" in command:
+        contacts = " ".join(contacts)
+        print(f"Contacts: {contacts}")
