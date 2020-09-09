@@ -1,0 +1,27 @@
+shot_targets = list(map(int, input().split()))
+
+command = ''
+
+shot_targets_counter = 0
+
+while command != "End":
+    command = input()
+    if command == "End":
+        break
+    else:
+        target = int(command)
+
+    if 0 <= target < len(shot_targets):
+        aimed_target = shot_targets[target]
+        shot_targets[target] = -1
+        shot_targets_counter += 1
+
+        for i in range(0, len(shot_targets)):
+            if shot_targets[i] > aimed_target and i != target and shot_targets[i] != -1:
+                shot_targets[i] -= aimed_target
+            elif shot_targets[i] <= aimed_target and i != target and shot_targets[i] != -1:
+                shot_targets[i] += aimed_target
+
+if command == "End":
+    shot_targets = " ".join(map(str, shot_targets))
+    print(f"Shot targets: {shot_targets_counter} -> {shot_targets}")
