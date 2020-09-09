@@ -1,0 +1,44 @@
+list_of_shops = input().split()
+commands_count = int(input())
+
+for cmd in range(commands_count):
+    command = input().split()
+    action = command[0]
+
+    if action == "Include":
+        shop = command[1]
+        list_of_shops.append(shop)
+
+    elif action == "Visit":
+        if "first" in command:
+            shops_to_remove = int(command[2])
+            if shops_to_remove <= len(list_of_shops):
+                del list_of_shops[0:shops_to_remove]
+        elif "last" in command:
+            shops_to_remove = int(command[2])
+            if shops_to_remove <= len(list_of_shops):
+                del list_of_shops[-shops_to_remove:len(list_of_shops)]
+
+    elif action == "Prefer":
+        shop_one = int(command[1])
+        shop_two = int(command[2])
+        if 0 <= shop_one < len(list_of_shops) and 0 <= shop_two < len(list_of_shops):
+            shop_one_name = list_of_shops[shop_one]
+            shop_one_two = list_of_shops[shop_two]
+
+            for i, v in enumerate(list_of_shops):
+                if v == shop_one_name:
+                    list_of_shops[i] = shop_one_two
+                elif v == shop_one_two:
+                    list_of_shops[i] = shop_one_name
+
+    elif action == "Place":
+        shop = command[1]
+        index = int(command[2]) + 1
+
+        if 0 <= index < len(list_of_shops):
+            list_of_shops.insert(index, shop)
+
+
+list_of_shops = " ".join(list_of_shops)
+print(f"Shops left: \n{list_of_shops}")
