@@ -1,0 +1,40 @@
+target_sequence = list(map(int, input().split(" ")))
+
+command = ''
+
+while command != "End":
+    command = input().split(" ")
+    action = command[0]
+    if action == "End":
+        break
+
+    elif action == "Shoot":
+        index = int(command[1])
+        power = int(command[2])
+
+        if 0 <= index < len(target_sequence):
+            target_sequence[index] -= power
+            if target_sequence[index] <= 0:
+                target_sequence.pop(index)
+
+    elif action == "Add":
+        index = int(command[1])
+        value = int(command[2])
+
+        if 0 <= index < len(target_sequence):
+            target_sequence.insert(index, value)
+        else:
+            print("Invalid placement!")
+
+    elif action == "Strike":
+        index = int(command[1])
+        radius = int(command[2])
+
+        if index - radius >= 0 and index + radius <= target_sequence[-1] and 0 <= index < len(target_sequence):
+            del target_sequence[index - radius: index + radius + 1]
+        else:
+            print("Strike missed!")
+
+if action == "End":
+    target_sequence = "|".join(map(str, target_sequence))
+    print(target_sequence)
