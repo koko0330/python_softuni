@@ -1,0 +1,21 @@
+receptionist_one_per_hour = int(input())
+receptionist_two_per_hour = int(input())
+receptionist_three_per_hour = int(input())
+total_students_count = int(input())
+
+total_students_per_hour = receptionist_one_per_hour + receptionist_two_per_hour + receptionist_three_per_hour
+
+hour = 0
+
+while total_students_count > 0:
+    total_students_count -= total_students_per_hour
+
+    if hour % 4 == 0:
+        total_students_count += total_students_per_hour
+
+    if total_students_count <= 0:
+        break
+
+    hour += 1
+
+print(f"Time needed: {hour}h.")
