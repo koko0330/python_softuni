@@ -1,0 +1,51 @@
+initial_loot = input().split('|')
+
+command = ''
+letter_count = 0
+
+while command != "Yohoho!":
+    command = input().split()
+    action = command[0]
+
+    if action == "Yohoho!":
+        break
+
+    elif action == "Loot":
+        command.pop(0)
+        for item in command:
+            if item not in initial_loot:
+                initial_loot.insert(0, item)
+
+    elif action == "Drop":
+        index = int(command[1])
+        if 0 <= index < len(initial_loot):
+            item_to_drop = initial_loot[index]
+            initial_loot.remove(item_to_drop)
+            initial_loot.append(item_to_drop)
+
+    elif action == "Steal":
+        count = int(command[1])
+        if len(initial_loot) < count:
+            print(", ".join(initial_loot))
+            initial_loot.clear()
+        else:
+            start_index = len(initial_loot) - count
+            end_index = len(initial_loot)
+            print(", ".join(initial_loot[start_index:end_index]))
+            del initial_loot[start_index:end_index]
+
+treasure_count = len(initial_loot)
+
+if treasure_count > 0:
+    for item in initial_loot:
+        for i in item:
+            letter_count += 1
+
+
+if action == "Yohoho!":
+    if len(initial_loot) > 0:
+        average_treasure = letter_count / treasure_count
+        print(f"Average treasure gain: {average_treasure:.2f} pirate credits.")
+
+    else:
+        print("Failed treasure hunt.")
