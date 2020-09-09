@@ -1,0 +1,53 @@
+frogs_names = input().split()
+
+command = ''
+
+while command != "Print":
+    command = input().split()
+    if "Print" in command:
+        break
+
+    action = command[0]
+
+    if action == "Join":
+        frog = command[1]
+        if frog not in frogs_names:
+            frogs_names.append(frog)
+
+    elif action == "Jump":
+        frog = command[1]
+        index = int(command[2])
+        if 0 <= index < len(frogs_names):
+            frogs_names.insert(index, frog)
+
+    elif action == "Dive":
+        index = int(command[1])
+        if 0 <= index < len(frogs_names):
+            frogs_names.remove(frogs_names[index])
+
+    elif action == "First":
+        first_count = int(command[1])
+
+        if 0 <= first_count < len(frogs_names):
+            print(" ".join(frogs_names[0:first_count]))
+        else:
+            print(" ".join(frogs_names))
+
+    elif action == "Last":
+        last_count = int(command[1])
+
+        if 0 <= last_count < len(frogs_names):
+            last_index = len(frogs_names)
+            print(" ".join(frogs_names[-last_count:last_index]))
+        else:
+            print(" ".join(frogs_names))
+
+if "Print" in command:
+    if "Normal" in command:
+        frogs_names = " ".join(frogs_names)
+        print(f"Frogs: {frogs_names}")
+
+    elif "Reversed" in command:
+        frogs_names = frogs_names[::-1]
+        frogs_names = " ".join(frogs_names)
+        print(f"Frogs: {frogs_names}")
