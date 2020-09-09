@@ -1,0 +1,45 @@
+friends_list = input().split(", ")
+
+command = ''
+blacklisted_names_count = 0
+lost_names_count = 0
+
+while command != "Report":
+    command = input().split()
+    action = command[0]
+
+    if action == "Report":
+        break
+
+    elif action == "Blacklist":
+        name = command[1]
+
+        if name not in friends_list:
+            print(f"{name} was not found.")
+
+        elif name in friends_list:
+            for i, v in enumerate(friends_list):
+                if v == name:
+                    blacklisted_names_count += 1
+                    friends_list[i] = "Blacklisted"
+                    print(f"{name} was blacklisted.")
+
+    elif action == "Error":
+        index = int(command[1])
+        if friends_list[index] != "Blacklisted" and friends_list[index] != "Lost":
+            lost_names_count += 1
+            print(f"{friends_list[index]} was lost due to an error.")
+            friends_list[index] = "Lost"
+
+    elif action == "Change":
+        index = int(command[1])
+        new_name = command[2]
+        if 0 <= index < len(friends_list):
+            print(f"{friends_list[index]} changed his username to {new_name}.")
+            friends_list[index] = new_name
+
+if action == "Report":
+    friends_list = " ".join(friends_list)
+    print(f"Blacklisted names: {blacklisted_names_count}")
+    print(f"Lost names: {lost_names_count}")
+    print(f"{friends_list}")
