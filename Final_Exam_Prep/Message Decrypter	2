@@ -1,0 +1,24 @@
+import re
+
+pattern = r"^(\$|\%)([A-Z][a-z]{2,})(\1):\s\[([0-9]+)\]\|\[([0-9]+)\]\|\[([0-9]+)\]\|$"
+
+n = int(input())
+
+final_string = ''
+
+for i in range(n):
+    line = input()
+
+    match = re.findall(pattern,line)
+
+    if len(match) == 0:
+        print("Valid message not found!")
+
+    else:
+        symbol_one = chr(int(match[0][3]))
+        symbol_two = chr(int(match[0][4]))
+        symbol_three = chr(int(match[0][5]))
+
+        final_string = symbol_one + symbol_two + symbol_three
+
+        print(f"{match[0][1]}: {final_string}")
