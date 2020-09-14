@@ -1,0 +1,38 @@
+all_stops = input()
+
+while True:
+    command = input()
+
+    if "Travel" in command:
+        break
+
+    else:
+        tokens = command.split(":")
+
+        if "Add Stop" in command:
+            index = int(tokens[1])
+            string_to_add = tokens[2]
+
+            if 0 <= index < len(all_stops):
+                all_stops = all_stops[0:index] + string_to_add + all_stops[index:len(all_stops)]
+            print(all_stops)
+
+        elif "Remove Stop" in command:
+            start_index = int(tokens[1])
+            end_index = int(tokens[2])
+
+            if 0 <= start_index < len(all_stops) and 0 <= end_index < len(all_stops):
+                string_to_remove = all_stops[start_index:end_index + 1]
+                all_stops = all_stops.replace(string_to_remove, "")
+            print(all_stops)
+
+        elif "Switch" in command:
+            old_string = tokens[1]
+            new_string = tokens[2]
+
+            if old_string in all_stops:
+                all_stops = all_stops.replace(old_string, new_string)
+            print(all_stops)
+
+
+print(f"Ready for world tour! Planned stops: {all_stops}")
