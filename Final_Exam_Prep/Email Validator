@@ -1,0 +1,52 @@
+email_to_use = input()
+
+while True:
+    command = input()
+
+    if "Complete" in command:
+        break
+
+    else:
+        tokens = command.split()
+
+        if "Make Upper" in command:
+            email_to_use = email_to_use.upper()
+            print(email_to_use)
+
+        elif "Make Lower" in command:
+            email_to_use = email_to_use.lower()
+            print(email_to_use)
+
+        elif "GetDomain" in command:
+            count = int(tokens[1])
+            string_to_print = email_to_use[-count:len(email_to_use)]
+            print(string_to_print)
+
+        elif "GetUsername" in command:
+            end_index = 0
+
+            if "@"  in email_to_use:
+                for i, v in enumerate(email_to_use):
+                    if v == "@":
+                        end_index = i
+                substring = email_to_use[0:end_index]
+                print(substring)
+            else:
+                print(f"The email {email_to_use} doesn't contain the @ symbol.")
+
+        elif "Replace" in command:
+            char = tokens[1]
+            while char in email_to_use:
+                if char in email_to_use:
+                    email_to_use = email_to_use.replace(char, "-")
+            print(email_to_use)
+
+        elif "Encrypt" in command:
+            asscii_string = []
+            for i in email_to_use:
+                num = ord(i)
+                asscii_string.append(num)
+
+            asscii_string = list(map(str, asscii_string))
+            asscii_string = " ".join(asscii_string)
+            print(asscii_string)
