@@ -1,0 +1,24 @@
+import re
+
+pattern = r"(^[#$%*&])([A-Za-z]+)(\1)=([0-9]+)!!(.+)$"
+
+decrypted_code = ''
+
+while True:
+    line = input()
+
+    match = re.findall(pattern, line)
+
+    if len(match) == 0:
+        print("Nothing found!")
+
+    elif int(match[0][3]) != len(match[0][4]):
+        print("Nothing found!")
+
+    else:
+        for i in match[0][4]:
+            char = chr(ord(i) + int(match[0][3]))
+            decrypted_code += char
+
+        print(f"Coordinates found! {match[0][1]} -> {decrypted_code}")
+        break
