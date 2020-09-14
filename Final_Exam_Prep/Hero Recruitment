@@ -1,0 +1,50 @@
+command = ''
+
+heroes_dict = {}
+
+while "End" not in command:
+    command = input()
+
+    if "End" in command:
+        break
+    else:
+        tokens = command.split()
+
+        if "Enroll" in command:
+            hero_name = tokens[1]
+            if hero_name not in heroes_dict:
+                heroes_dict[hero_name] = []
+            else:
+                print(f"{hero_name} is already enrolled.")
+
+        elif "Learn" in command:
+            hero_name = tokens[1]
+            spell_name = tokens[2]
+
+            if hero_name not in heroes_dict:
+                print(f"{hero_name} doesn't exist.")
+            else:
+                if spell_name not in heroes_dict[hero_name]:
+                    heroes_dict[hero_name].append(spell_name)
+                else:
+                    print(f"{hero_name} has already learnt {spell_name}.")
+
+        elif "Unlearn" in command:
+            hero_name = tokens[1]
+            spell_name = tokens[2]
+
+            if hero_name not in heroes_dict:
+                print(f"{hero_name} doesn't exist.")
+            else:
+                if spell_name not in heroes_dict[hero_name]:
+                    print(f"{hero_name} doesn't know {spell_name}.")
+                else:
+                    heroes_dict[hero_name].remove(spell_name)
+
+
+heroes_dict = dict(sorted(heroes_dict.items(), key=lambda x: (-len(x[1]), x[0])))
+
+print("Heroes:")
+
+for key, values in heroes_dict.items():
+    print(f"== {key}: {', '.join(values)}")
