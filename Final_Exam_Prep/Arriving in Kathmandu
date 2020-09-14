@@ -1,0 +1,30 @@
+import re
+
+pattern = "(^([a-zA-Z0-9\!@#$?])+)=([0-9]+)<<((.+)$)"
+
+list_of_symbols = ["!", "@", "#", "$", "?"]
+
+peak_name = ''
+
+while True:
+    line = input()
+
+    if "Last note" in line:
+        break
+
+    else:
+        match = re.findall(pattern,line)
+
+        if len(match) == 0:
+            print("Nothing found!")
+
+        elif int(match[0][2]) != len(match[0][3]):
+            print("Nothing found!")
+
+        else:
+            peak_name = match[0][0]
+            for i in list_of_symbols:
+                if i in peak_name :
+                    peak_name = peak_name.replace(i, "")
+
+            print(f"Coordinates found! {peak_name} -> {match[0][3]}")
