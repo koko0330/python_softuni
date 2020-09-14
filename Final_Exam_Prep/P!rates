@@ -1,0 +1,72 @@
+command = ''
+line = ''
+
+cities_dict = {}
+
+while command != "Sail":
+    command = input()
+    if "Sail" in command:
+        break
+
+    else:
+        tokens = command.split("||")
+        city = tokens[0]
+        population = int(tokens[1])
+        gold = int(tokens[2])
+        if city in cities_dict:
+            cities_dict[city][0] += population
+            cities_dict[city][1] += gold
+
+        else:
+            cities_dict[city] = [population, gold]
+
+
+
+while line != "End":
+    line = input()
+    if "End" in line:
+        break
+
+    else:
+        tkns = line.split("=>")
+        city_to_do = tkns[1]
+
+        if "Plunder" in line and city_to_do in cities_dict:
+            population_killed = int(tkns[2])
+            gold_taken = int(tkns[3])
+            cities_dict[city_to_do][0] -= population_killed
+            cities_dict[city_to_do][1] -= gold_taken
+
+            print(f"{tkns[1]} plundered! {tkns[3]} gold stolen, {tkns[2]} citizens killed.")
+
+            if cities_dict[city_to_do][0] <= 0 or cities_dict[city_to_do][1] <= 0:
+                del cities_dict[city_to_do]
+                print(f"{city_to_do} has been wiped off the map!")
+
+
+        elif "Prosper" in line and city_to_do in cities_dict:
+            gold_to_increase = int(tkns[2])
+            if gold_to_increase < 0:
+                print("Gold added cannot be a negative number!")
+                continue
+            else:
+                cities_dict[city_to_do][1] += gold_to_increase
+                print(f"{gold_to_increase} gold added to the city treasury. {city_to_do} now has {cities_dict[city_to_do][1]} gold.")
+
+cities_left = 0
+for city in cities_dict:
+    if cities_dict[city][0] > 0 and cities_dict[city][1] > 0:
+        cities_left += 1
+
+cities_dict = dict(sorted(cities_dict.items(), key=lambda x: (-x[1][1], x[0])))
+
+if cities_left > 0:
+    print(f"Ahoy, Captain! There are {cities_left} wealthy settlements to go to:")
+else:
+    print("Ahoy, Captain! All targets have been plundered and destroyed!")
+
+
+
+if cities_left > 0:
+    for key, value in cities_dict.items():
+        print(f"{key} -> Population: {value[0]} citizens, Gold: {value[1]} kg")
