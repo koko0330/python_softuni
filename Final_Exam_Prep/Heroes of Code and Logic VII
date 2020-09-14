@@ -1,0 +1,76 @@
+number_of_heroes = int(input())
+
+heroes_collection = {}
+
+for i in range(number_of_heroes):
+    hero_line = input().split()
+    hero = hero_line[0]
+    hit_points = int(hero_line[1])
+    mana_points = int(hero_line[2])
+    heroes_collection[hero] = [hit_points, mana_points]
+
+
+command = ""
+maximum_hp = 100
+maximum_mp = 200
+
+while command != "End":
+    command = input()
+    if "End" in command:
+        break
+    else:
+        tokens = command.split(" - ")
+        hero_to_go = tokens[1]
+
+        if "CastSpell" in command:
+            mp_needed = int(tokens[2])
+            spell_name = tokens[3]
+
+            if heroes_collection[hero_to_go][1] >= mp_needed:
+                heroes_collection[hero_to_go][1] -= mp_needed
+                print(f"{hero_to_go} has successfully cast {spell_name} and now has {heroes_collection[hero_to_go][1]} MP!")
+            else:
+                print(f"{hero_to_go} does not have enough MP to cast {spell_name}!")
+
+        elif "TakeDamage" in command:
+            damage = int(tokens[2])
+            attacker = tokens[3]
+
+            if heroes_collection[hero_to_go][0] - damage > 0:
+                heroes_collection[hero_to_go][0] -= damage
+                print(f"{hero_to_go} was hit for {damage} HP by {attacker} and now has {heroes_collection[hero_to_go][0]} HP left!")
+            else:
+                del heroes_collection[hero_to_go]
+                print(f"{hero_to_go} has been killed by {attacker}!")
+
+        elif "Recharge" in command:
+            amount = int(tokens[2])
+            if heroes_collection[hero_to_go][1] + amount > maximum_mp:
+                difference = (maximum_mp + amount) - (heroes_collection[hero_to_go][1] + amount)
+                heroes_collection[hero_to_go][1] = maximum_mp
+                print(f"{hero_to_go} recharged for {difference} MP!")
+            else:
+                heroes_collection[hero_to_go][1] += amount
+
+                print(f"{hero_to_go} recharged for {amount} MP!")
+
+        elif "Heal" in command:
+            amount = int(tokens[2])
+            if heroes_collection[hero_to_go][0] + amount > maximum_hp:
+                difference = (maximum_hp + amount) - (heroes_collection[hero_to_go][0] + amount)
+                heroes_collection[hero_to_go][0] = maximum_hp
+                print(f"{hero_to_go} healed for {difference} HP!")
+            else:
+                heroes_collection[hero_to_go][0] += amount
+                print(f"{hero_to_go} healed for {amount} HP!")
+
+
+heroes_collection = dict(sorted(heroes_collection.items(), key=lambda x: (-x[1][0], x[0])))
+
+for key, value in heroes_collection.items():
+    print(key)
+
+    for val in sorted(value):
+        print(f"HP: {value[0]}")
+        print(f"MP: {value[1]}")
+        break
