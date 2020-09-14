@@ -1,0 +1,61 @@
+number_of_cars = int(input())
+
+garage = {}
+
+max_tank_capacity = 75
+
+for i in range(number_of_cars):
+    car_line = input().split("|")
+    car = car_line[0]
+    mileage = int(car_line[1])
+    fuel = int(car_line[2])
+    garage[car] = [mileage, fuel]
+
+
+command = ''
+
+while command != "Stop":
+    command = input()
+    if command == "Stop":
+        break
+    else:
+        tokens = command.split(" : ")
+        car_to_do = tokens[1]
+
+        if "Drive" in command:
+            distance = int(tokens[2])
+            fuel_needed = int(tokens[3])
+            if garage[car_to_do][1] >= fuel_needed:
+                garage[car_to_do][1] -= fuel_needed
+                garage[car_to_do][0] += distance
+                print(f"{car_to_do} driven for {distance} kilometers. {fuel_needed} liters of fuel consumed.")
+            else:
+                print("Not enough fuel to make that ride")
+
+            if garage[car_to_do][0] >= 100000:
+                del garage[car_to_do]
+                print(f"Time to sell the {car_to_do}!")
+
+        elif "Refuel" in command:
+            fuel_to_fill = int(tokens[2])
+            if garage[car_to_do][1] + fuel_to_fill > max_tank_capacity:
+                fuel_difference = (max_tank_capacity + fuel_to_fill) - (garage[car_to_do][1] + fuel_to_fill)
+                garage[car_to_do][1] = max_tank_capacity
+                print(f"{car_to_do} refueled with {fuel_difference} liters")
+            else:
+                garage[car_to_do][1] += fuel_to_fill
+                print(f"{car_to_do} refueled with {fuel_to_fill} liters")
+
+        elif "Revert" in command:
+            kilometers = int(tokens[2])
+            if garage[car_to_do][0] - kilometers < 10000:
+                garage[car_to_do][0] = 10000
+            else:
+                garage[car_to_do][0] -= kilometers
+                print(f"{car_to_do} mileage decreased by {kilometers} kilometers")
+
+
+garage = dict(sorted(garage.items(), key=lambda x : (-x[1][0], x[0])))
+
+for key, value in garage.items():
+    print(f"{key} -> Mileage: {value[0]} kms, Fuel in the tank: {value[1]} lt.")
