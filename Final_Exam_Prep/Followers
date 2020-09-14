@@ -1,0 +1,45 @@
+followers_dics = {}
+
+while True:
+    command = input()
+
+    if "Log out" in command:
+        break
+
+    else:
+        tokens = command.split(": ")
+        username = tokens[1]
+
+        if "New follower" in command:
+            if username not in followers_dics:
+                followers_dics[username] = [0, 0]
+
+        elif "Like" in command:
+            count_likes = int(tokens[2])
+            if username not in followers_dics:
+                followers_dics[username] = [0, 0]
+                followers_dics[username][0] += count_likes
+            else:
+                followers_dics[username][0] += count_likes
+
+        elif "Comment" in command:
+            if username not in followers_dics:
+                followers_dics[username] = [0, 0]
+                followers_dics[username][1] += 1
+            else:
+                followers_dics[username][1] += 1
+
+        elif "Blocked" in command:
+            if username not in followers_dics:
+                print(f"{username} doesn't exist.")
+            else:
+                del followers_dics[username]
+
+
+followers_dics = dict(sorted(followers_dics.items(), key=lambda x: (-(x[1][0]), x[0])))
+
+
+print(f"{len(followers_dics)} followers")
+for key, value in followers_dics.items():
+    sum_reactions = value[0] + value[1]
+    print(f"{key}: {sum_reactions}")
