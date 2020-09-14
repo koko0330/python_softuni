@@ -1,0 +1,24 @@
+import re
+
+pattern = r"(=|/)([A-Z][a-zA-z]{2,})(\1)"
+
+line = input()
+
+match = re.findall(pattern, line)
+
+list_valid = []
+
+for i, v in enumerate(match):
+    element = match[i][1]
+    list_valid.append(element)
+
+
+list_valid = ', '.join(list_valid)
+print(f"Destinations: {list_valid}")
+
+travel_points = 0
+for i in list_valid:
+    if i.isalpha():
+        travel_points += 1
+
+print(f"Travel Points: {travel_points}")
