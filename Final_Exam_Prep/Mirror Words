@@ -1,0 +1,35 @@
+import re
+ 
+string = input()
+ 
+find = "[#][a-zA-Z]+[#][#][a-zA-Z]+[#]|[@][a-zA-Z]+[@][@][a-zA-Z]+[@]"
+ 
+ 
+pairs = re.findall(find, string)
+mirror_words = []
+ 
+for pair in pairs:
+    middle = int(len(pair) / 2)
+    left_word = pair[:middle].strip("#@")
+    right_word = pair[middle:].strip("#@")
+    if len(left_word) >= 3 and len(right_word) >= 3:
+        if left_word == right_word[::-1]:
+            mirror_words.append(f"{left_word} <=> {right_word}")
+ 
+pair_count = 0
+ 
+for v in range(len(pairs)):
+    pair = pairs[v]
+    if len(pair) >= 10:
+        pair_count += 1
+ 
+if pair_count > 0:
+    print(f"{pair_count} word pairs found!")
+else:
+    print("No word pairs found!")
+ 
+if len(mirror_words) > 0:
+    print("The mirror words are:")
+    print(', '.join(mirror_words))
+else:
+    print("No mirror words!")
