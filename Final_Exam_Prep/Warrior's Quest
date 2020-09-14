@@ -1,0 +1,45 @@
+skill_to_decipher = input()
+
+while True:
+    command = input()
+
+    if command == "For Azeroth":
+        break
+    else:
+        tokens = command.split()
+
+        if "GladiatorStance" in command:
+            skill_to_decipher = skill_to_decipher.upper()
+            print(skill_to_decipher)
+
+        elif "DefensiveStance" in command:
+            skill_to_decipher = skill_to_decipher.lower()
+            print(skill_to_decipher)
+
+        elif "Dispel" in command:
+            index = int(tokens[1])
+            replacement_letter = tokens[2]
+
+            if 0 <= index < len(skill_to_decipher):
+                skill_to_decipher = skill_to_decipher[:index] + replacement_letter + skill_to_decipher[index + 1:]
+                print("Success!")
+
+            else:
+                print("Dispel too weak.")
+
+        elif "Target Change" in command:
+            substring = tokens[2]
+            second_substring = tokens[3]
+
+            if substring in skill_to_decipher:
+                skill_to_decipher = skill_to_decipher.replace(substring, second_substring)
+
+            print(skill_to_decipher)
+
+        elif "Target Remove" in command:
+            substring = tokens[2]
+            skill_to_decipher = skill_to_decipher.replace(substring, "")
+            print(skill_to_decipher)
+
+        else:
+            print("Command doesn't exist!")
