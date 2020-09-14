@@ -1,0 +1,46 @@
+guest_dict = {}
+unlike_meals = 0
+
+while True:
+    command = input()
+    if command == "Stop":
+        break
+    else:
+        tokens = command.split("-")
+
+        if "Like" in command:
+            guest = tokens[1]
+            meal = tokens[2]
+
+            if guest not in guest_dict:
+                guest_dict[guest] = []
+
+                if meal not in guest_dict[guest]:
+                    guest_dict[guest].append(meal)
+
+            else:
+                if meal not in guest_dict[guest]:
+                    guest_dict[guest].append(meal)
+
+        elif "Unlike" in command:
+            guest = tokens[1]
+            meal = tokens[2]
+
+            if guest not in guest_dict:
+                print(f"{guest} is not at the party.")
+            else:
+                if meal not in guest_dict[guest]:
+                    print(f"{guest} doesn't have the {meal} in his/her collection.")
+                else:
+                    unlike_meals += 1
+                    guest_dict[guest].remove(meal)
+                    print(f"{guest} doesn't like the {meal}.")
+
+
+guest_dict = dict(sorted(guest_dict.items(), key= lambda x: (-len(x[1]), x[0])))
+
+for key, value in guest_dict.items():
+    print(f"{key}: {', '.join(value)}")
+
+
+print(f"Unliked meals: {unlike_meals}")
