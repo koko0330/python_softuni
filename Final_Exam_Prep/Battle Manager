@@ -1,0 +1,56 @@
+people_dict = {}
+
+while True:
+    command = input()
+
+    if "Results" in command:
+        break
+
+    else:
+        tokens = command.split(":")
+
+        if "Add" in command:
+            person_name = tokens[1]
+            health = int(tokens[2])
+            energy = int(tokens[3])
+
+            if person_name not in people_dict:
+                people_dict[person_name] = [health, energy]
+
+            else:
+                people_dict[person_name][0] += health
+
+        elif "Attack" in command:
+            attacker_name = tokens[1]
+            defender_name = tokens[2]
+            damage = int(tokens[3])
+
+            if attacker_name in people_dict and defender_name in people_dict:
+                people_dict[defender_name][0] -= damage
+                people_dict[attacker_name][1] -= 1
+
+                if people_dict[defender_name][0] <= 0:
+                    del people_dict[defender_name]
+                    print(f"{defender_name} was disqualified!")
+
+                if people_dict[attacker_name][1] <= 0:
+                    del people_dict[attacker_name]
+                    print(f"{attacker_name} was disqualified!")
+
+        elif "Delete" in command:
+            user = tokens[1]
+
+            if user in people_dict:
+                del people_dict[user]
+
+            if user == "All":
+                people_dict = {}
+
+
+people_dict = dict(sorted(people_dict.items(), key=lambda x: (-x[1][0], x[0])))
+
+
+print(f"People count: {len(people_dict)}")
+
+for key, value in people_dict.items():
+    print(f"{key} - {value[0]} - {value[1]}")
