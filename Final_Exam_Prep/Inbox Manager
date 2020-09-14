@@ -1,0 +1,45 @@
+collection_of_users = {}
+
+while True:
+    command = input()
+
+    if "Statistics" in command:
+        break
+
+    else:
+        tokens = command.split("->")
+
+        if "Add" in command:
+            user = tokens[1]
+
+            if user not in collection_of_users:
+                collection_of_users[user] = []
+            else:
+                print(f"{user} is already registered")
+
+        elif "Send" in command:
+            username = tokens[1]
+            email = tokens[2]
+
+            collection_of_users[username].append(email)
+
+        elif "Delete" in command:
+            user = tokens[1]
+
+            if user in collection_of_users:
+                del collection_of_users[user]
+
+            else:
+                print(f"{user} not found!")
+
+
+collection_of_users = dict(sorted(collection_of_users.items(), key= lambda x: (-len(x[1]), x[0])))
+
+users_count = len(collection_of_users)
+
+print(f"Users count: {users_count}")
+
+for key, value in collection_of_users.items():
+    print(key)
+    for i in sorted(value):
+        print(f"- {i}")
