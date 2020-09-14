@@ -1,0 +1,41 @@
+raw_activation_key = input()
+
+while True:
+    command = input()
+
+    if command == "Generate":
+        break
+    else:
+        tokens = command.split(">>>")
+
+        if "Contains" in tokens:
+            substring = tokens[1]
+            if substring in raw_activation_key:
+                print(f"{raw_activation_key} contains {substring}")
+            else:
+                print("Substring not found!")
+
+        elif "Flip" in tokens:
+            start_index = int(tokens[2])
+            end_index = int(tokens[3])
+
+            if "Upper" in tokens:
+                old_one = raw_activation_key[start_index:end_index]
+                new_one = old_one.upper()
+                raw_activation_key = raw_activation_key.replace(old_one, new_one)
+                print(raw_activation_key)
+
+            elif "Lower" in tokens:
+                old_one = raw_activation_key[start_index:end_index]
+                new_one = old_one.lower()
+                raw_activation_key = raw_activation_key.replace(old_one, new_one)
+                print(raw_activation_key)
+
+        elif "Slice" in tokens:
+            start_index = int(tokens[1])
+            end_index = int(tokens[2])
+            cut = raw_activation_key[start_index:end_index]
+            raw_activation_key = raw_activation_key.replace(cut, "")
+            print(raw_activation_key)
+
+print(f"Your activation key is: {raw_activation_key}")
