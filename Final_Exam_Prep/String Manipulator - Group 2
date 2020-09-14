@@ -1,0 +1,53 @@
+string = input()
+
+while True:
+    command = input()
+
+    if command == "Done":
+        break
+    else:
+        tokens = command.split()
+
+        if "Change" in command:
+            char = tokens[1]
+            replacement = tokens[2]
+
+            while char in string:
+                if char in string:
+                    string = string.replace(char, replacement)
+
+            print(string)
+
+        elif "Includes" in command:
+            substring = tokens[1]
+            if substring in string:
+                print(True)
+            else:
+                print(False)
+
+        elif "End" in command:
+            end_string = tokens[1]
+            slice_string = string[-len(end_string):len(string)]
+
+            if slice_string == end_string:
+                print(True)
+            else:
+                print(False)
+
+        elif "Uppercase" in command:
+            string = string.upper()
+            print(string)
+
+        elif "FindIndex" in command:
+            char = tokens[1]
+
+            for i, v in enumerate(string):
+                if v == char:
+                    print(i)
+                    break
+
+        elif "Cut" in command:
+            start_index = int(tokens[1])
+            length = int(tokens[2])
+            string = string[start_index: start_index + length]
+            print(string)
