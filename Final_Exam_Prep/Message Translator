@@ -1,0 +1,23 @@
+import re
+
+pattern = r"(!([A-Z][a-z]{2,})!):(\[([a-zA-Z]{8,})\])"
+
+count_of_messages = int(input())
+
+numbers_list = []
+
+for i in range(count_of_messages):
+    message = input()
+
+    matches = re.findall(pattern, message)
+
+    if len(matches) == 0:
+        print("The message is invalid")
+    else:
+        for j in matches[0][3]:
+            num = ord(j)
+            numbers_list.append(num)
+
+        numbers_list = list(map(str, numbers_list))
+        numbers_list = " ".join(numbers_list)
+        print(f"{matches[0][1]}: {numbers_list}")
