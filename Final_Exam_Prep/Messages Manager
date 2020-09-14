@@ -1,0 +1,53 @@
+capacity_of_messages = int(input())
+
+users_dict = {}
+
+while True:
+    command = input()
+
+    if "Statistics" in command:
+        break
+
+    else:
+        tokens = command.split("=")
+
+        if "Add" in command:
+            username = tokens[1]
+            count_sent = int(tokens[2])
+            count_received = int(tokens[3])
+
+            if username not in users_dict:
+                users_dict[username] = [count_sent, count_received]
+
+        elif "Message" in command:
+            sender = tokens[1]
+            receiver = tokens[2]
+
+            if sender and receiver in users_dict:
+                users_dict[sender][0] += 1
+                users_dict[receiver][1] += 1
+                
+                if users_dict[sender][0] + users_dict[sender][1] == capacity_of_messages:
+                    del users_dict[sender]
+                    print(f"{sender} reached the capacity!")
+                    
+                if users_dict[receiver][0] + users_dict[receiver][1] == capacity_of_messages:
+                    del users_dict[receiver]
+                    print(f"{receiver} reached the capacity!")
+
+        elif "Empty" in command:
+            user = tokens[1]
+
+            if user in users_dict:
+                del users_dict[user]
+
+            if "All" in command:
+                users_dict = {}
+
+
+users_dict = dict(sorted(users_dict.items(), key= lambda x: (-(x[1][1]),x[0])))
+
+
+print(f"Users count: {len(users_dict)}")
+for key, value in users_dict.items():
+    print(f"{key} - {sum(value)}")
