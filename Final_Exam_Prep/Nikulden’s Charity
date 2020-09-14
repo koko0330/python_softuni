@@ -1,0 +1,58 @@
+string = input()
+
+while True:
+    command = input()
+    if "Finish" in command:
+        break
+    else:
+        tokens = command.split()
+
+        if "Replace" in command:
+            current_char = tokens[1]
+            new_char = tokens[2]
+
+            while current_char in string:
+                if current_char in string:
+                    string = string.replace(current_char, new_char)
+            print(string)
+
+        elif "Cut" in command:
+            start_index = int(tokens[1])
+            end_index = int(tokens[2])
+
+            if 0 <= start_index < len(string) and 0 <= end_index < len(string):
+                string = string[0:start_index] + string[end_index + 1:len(string)]
+                print(string)
+            else:
+                print("Invalid indexes!")
+
+        elif "Make" in command:
+            if "Upper" in command:
+                string = string.upper()
+                print(string)
+            else:
+                string = string.lower()
+                print(string)
+
+        elif "Check" in command:
+            string_to_check = tokens[1]
+            if string_to_check in string:
+                print(f"Message contains {string_to_check}")
+            else:
+                print(f"Message doesn't contain {string_to_check}")
+
+
+        elif "Sum" in command:
+            start_index = int(tokens[1])
+            end_index = int(tokens[2])
+            if 0 <= start_index < len(string) and 0 <= end_index < len(string):
+                string_to_sum = string[start_index:end_index + 1]
+                total_sum = 0
+                for i in string_to_sum:
+                    num = ord(i)
+                    total_sum += num
+
+                print(total_sum)
+
+            else:
+                print("Invalid indexes!")
