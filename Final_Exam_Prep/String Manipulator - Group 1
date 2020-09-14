@@ -1,0 +1,55 @@
+string_to_manipulate = input()
+
+while True:
+    command = input()
+
+    if "End" in command:
+        break
+    else:
+        tokens = command.split()
+
+        if "Translate" in command:
+            char = tokens[1]
+            replacement = tokens[2]
+
+            if char in string_to_manipulate:
+                string_to_manipulate = string_to_manipulate.replace(char, replacement)
+                print(string_to_manipulate)
+
+        elif "Includes" in command:
+            string_to_check = tokens[1]
+
+            if string_to_check in string_to_manipulate:
+                print(True)
+            else:
+                print(False)
+
+        elif "Start" in command:
+            string_to_check = tokens[1]
+
+            if string_to_manipulate[0:len(string_to_check)] == string_to_check:
+                print(True)
+            else:
+                print(False)
+
+        elif "Lowercase" in command:
+            string_to_manipulate = string_to_manipulate.lower()
+            print(string_to_manipulate)
+
+        elif "FindIndex" in command:
+            char = tokens[1]
+            last_index = 0
+
+            for i, v in enumerate(string_to_manipulate):
+                if v == char:
+                    last_index = i
+
+            print(last_index)
+
+        elif "Remove" in command:
+            start_index = int(tokens[1])
+            count = int(tokens[2])
+
+            string_to_remove = string_to_manipulate[start_index:start_index + count]
+            string_to_manipulate = string_to_manipulate.replace(string_to_remove, "")
+            print(string_to_manipulate)
