@@ -1,0 +1,56 @@
+concert_dict = {}
+total_time = 0
+
+while True:
+    command = input()
+
+    if "start of concert" in command:
+        break
+
+    else:
+        tokens = command.split("; ")
+
+        if "Add" in command:
+            band_name = tokens[1]
+            members = tokens[2].split(", ")
+
+            if band_name not in concert_dict:
+                time = 0
+                concert_dict[band_name] = [members, time]
+
+            else:
+                for i in members:
+                    if i not in concert_dict[band_name][0]:
+                        concert_dict[band_name][0].append(i)
+
+
+        elif "Play" in command:
+            band_name = tokens[1]
+            time = int(tokens[2])
+
+            if band_name not in concert_dict:
+                members = []
+                concert_dict[band_name] = [members, time]
+                total_time += time
+
+            else:
+                if concert_dict[band_name][1] == 0:
+                    concert_dict[band_name][1] = time
+                    total_time += time
+                else:
+                    concert_dict[band_name][1] += time
+                    total_time += time
+
+print(f"Total time: {total_time}")
+
+concert_dict = dict(sorted(concert_dict.items(), key= lambda x: (-x[1][1], x[0])))
+
+for key, value in concert_dict.items():
+    print(f"{key} -> {value[1]}")
+
+band_to_print = input()
+
+print(band_to_print)
+
+for i in concert_dict[band_to_print][0]:
+    print(f"=> {i}")
