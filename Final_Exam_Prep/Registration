@@ -1,0 +1,22 @@
+import re
+
+numer_of_inputs = int(input())
+
+successful_registrations = 0
+
+for i in range(numer_of_inputs):
+    line = input()
+
+    pattern = r'U\$([A-Z][a-z]{2,})U\$P\@\$([a-z]{5,}[0-9]+)P\@\$'
+
+    matches = re.findall(pattern, line)
+
+    if len(matches) > 0:
+        successful_registrations += 1
+        print("Registration was successful")
+        print(f"Username: {matches[0][0]}, Password: {matches[0][1]}")
+
+    else:
+        print("Invalid username or password")
+
+print(f"Successful registrations: {successful_registrations}")
