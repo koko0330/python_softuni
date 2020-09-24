@@ -1,0 +1,9 @@
+nums = list(input().split())
+
+final_stack = []
+
+while len(nums) > 0:
+    num = nums.pop()
+    final_stack.append(num)
+
+print(" ".join(final_stack))
