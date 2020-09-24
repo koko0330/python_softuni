@@ -1,0 +1,22 @@
+from collections import deque
+
+
+def solve():
+    kids = input().split()
+    toss_count = int(input())
+    kids = deque(kids)
+    index = 0
+
+    while kids:
+        index += 1
+        person = kids.popleft()
+        if len(kids) >= 1:
+            if index == toss_count:
+                index = 0
+                print(f"Removed {person}")
+            else:
+                kids.append(person)
+        else:
+            print(f"Last is {person}")
+
+solve()
