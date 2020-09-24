@@ -1,0 +1,37 @@
+from collections import deque
+
+cups_capacity_sequence = deque(map(int, input().split()))
+bottle_with_water_sequence = deque(map(int, input().split()))
+
+wasted_water = 0
+completed = False
+
+while True:
+    if bottle_with_water_sequence:
+        bottle = bottle_with_water_sequence.pop()
+        cup = cups_capacity_sequence.popleft()
+
+        if cup - bottle < 0:
+            wasted_water += bottle - cup
+
+        cup -= bottle
+
+        if cup > 0:
+            cups_capacity_sequence.appendleft(cup)
+
+        if len(cups_capacity_sequence) == 0:
+            completed = True
+            bottle_with_water_sequence = list(map(str, bottle_with_water_sequence))
+            bottle_with_water_sequence = " ".join(bottle_with_water_sequence)
+            print(f"Bottles: {bottle_with_water_sequence}")
+            break
+
+    else:
+        break
+
+if completed == False:
+    cups_capacity_sequence = list(map(str, cups_capacity_sequence))
+    cups_capacity_sequence = " ".join(cups_capacity_sequence)
+    print(f"Cups: {cups_capacity_sequence}")
+
+print(f"Wasted litters of water: {wasted_water}")
