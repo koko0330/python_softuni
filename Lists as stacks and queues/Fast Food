@@ -1,0 +1,27 @@
+from collections import deque
+
+food_quantity = int(input())
+sequence = deque(map(int, input().split()))
+
+orders_served = []
+
+while food_quantity > 0:
+    if len(sequence) > 0:
+        item_to_pop = sequence.popleft()
+        food_quantity -= item_to_pop
+        orders_served.append(item_to_pop)
+
+        if food_quantity < 0:
+            sequence.appendleft(item_to_pop)
+    else:
+        break
+
+print(max(orders_served))
+
+if len(sequence) == 0:
+    print("Orders complete")
+
+else:
+    sequence = list(map(str, sequence))
+    sequence = " ".join(sequence)
+    print(f"Orders left: {sequence}")
