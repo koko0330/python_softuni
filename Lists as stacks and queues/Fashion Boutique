@@ -1,0 +1,22 @@
+clothes_stack = list(map(int, input().split()))
+
+rack_capacity = int(input())
+
+value = 0
+racks_count = 1
+
+while len(clothes_stack) > 0:
+    item_to_pop = clothes_stack[-1]
+    value += item_to_pop
+    clothes_stack.pop()
+
+    if value == rack_capacity and len(clothes_stack) > 0:
+        value = 0
+        racks_count += 1
+
+    elif value > rack_capacity:
+        clothes_stack.append(item_to_pop)
+        racks_count += 1
+        value = 0
+
+print(racks_count)
