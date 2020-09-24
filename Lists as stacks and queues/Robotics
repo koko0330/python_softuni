@@ -1,0 +1,41 @@
+from collections import deque
+from datetime import datetime, timedelta
+
+robots = input().split(";")
+
+robots_dict = {}
+
+for i in range(len(robots)):
+    robot = robots[i].split("-")
+    robot_name = robot[0]
+    robot_time = int(robot[1])
+    available_time = 0
+    robots_dict[robot_name] = [robot_time, available_time]
+
+start_time = datetime.strptime(input(), '%H:%M:%S')
+
+items = deque()
+
+next_item = input()
+
+while next_item != "End":
+    items.append(next_item)
+    next_item = input()
+
+current_time = 0
+
+while items:
+    current_time += 1
+
+    next_item = items.popleft()
+
+    for rob in robots_dict.items():
+        if rob[1][1] <= current_time:
+            rob[1][1] = current_time + rob[1][0]
+            time_str = (start_time + timedelta(seconds=current_time)) \
+                .strftime("%H:%M:%S")
+            print(f"{rob[0]} - {next_item} [{time_str}]")
+
+            break
+    else:
+        items.append(next_item)
