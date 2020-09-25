@@ -1,0 +1,35 @@
+def input_to_list(lines_count):
+    input_lines = []
+    for _ in range(lines_count):
+        input_lines.append(input())
+
+    return input_lines
+
+
+def count_student_grades(values):
+    students_grades = {}
+
+    for value in values:
+        (student, grade) = value.split()
+        if student not in students_grades:
+            students_grades[student] = [grade]
+        else:
+            students_grades[student].append(grade)
+
+    return students_grades
+
+
+def avg(values):
+    return sum(values) / len(values)
+
+
+def print_result(students_grades):
+    for key, value in students_grades.items():
+        average_grade = avg(list(map(float, value)))
+        grades_string = " ".join(f"{float(v):.2f}" for v in value)
+        print(f"{key} -> {grades_string} (avg: {average_grade:.2f})")
+
+
+test_input = input_to_list(int(input()))
+
+print_result(count_student_grades(test_input))
