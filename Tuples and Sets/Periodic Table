@@ -1,0 +1,12 @@
+n = int(input())
+
+elements = set()
+
+for _ in range(n):
+    chemical_compound = list(input().split())
+
+    for i in chemical_compound:
+        elements.add(i)
+
+for i in elements:
+    print(i)
