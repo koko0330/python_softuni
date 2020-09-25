@@ -1,0 +1,42 @@
+import sys
+
+n = int(input())
+
+longest_intersection = set()
+len_final_intersection = -sys.maxsize
+
+first_intersection = set()
+second_intersection = set()
+final_intersection = set()
+
+for _ in range(n):
+    input_range = input().split("-")
+
+    first_range = input_range[0].split(",")
+    first_start = int(first_range[0])
+    first_end = int(first_range[1])
+
+    second_range = input_range[1].split(",")
+    second_start = int(second_range[0])
+    second_end = int(second_range[1])
+
+    for i in range(first_start, first_end + 1):
+        first_intersection.add(i)
+
+    for j in range(second_start, second_end + 1):
+        second_intersection.add(j)
+
+    final_intersection = first_intersection & second_intersection
+
+    if len(final_intersection) > len_final_intersection:
+        len_final_intersection = len(final_intersection)
+        longest_intersection = final_intersection
+
+    first_intersection = set()
+    second_intersection = set()
+    final_intersection = set()
+
+
+longest_intersection = list(longest_intersection)
+
+print(f"Longest intersection is {longest_intersection} with length {len_final_intersection}")
