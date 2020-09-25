@@ -1,0 +1,20 @@
+n, m = list(map(int, input().split()))
+
+n_set = set()
+m_set = set()
+
+for i in range(n):
+    num = int(input())
+    if num not in n_set:
+        n_set.add(num)
+
+
+for i in range(m):
+    num = int(input())
+    if num not in m_set:
+        m_set.add(num)
+
+final_set = set(n_set & m_set)
+
+for i in final_set:
+    print(i)
