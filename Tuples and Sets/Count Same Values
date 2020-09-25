@@ -1,0 +1,8 @@
+tuple_to_do = tuple(map(float, input().split()))
+
+list_found = []
+
+for i in tuple_to_do:
+    if i not in list_found:
+        list_found.append(i)
+        print(f"{i} - {tuple_to_do.count(i)} times")
