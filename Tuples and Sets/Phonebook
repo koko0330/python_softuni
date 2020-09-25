@@ -1,0 +1,22 @@
+contacts_dict = {}
+
+while True:
+    text = input().split("-")
+
+    if text[0].isnumeric():
+        break
+    name = text[0]
+    number = text[1]
+    contacts_dict[name] = number
+
+
+n = int(text[0])
+
+for i in range(n):
+    person = input()
+
+    if person not in contacts_dict:
+        print(f"Contact {person} does not exist.")
+
+    else:
+        print(f"{person} -> {contacts_dict[person]}")
