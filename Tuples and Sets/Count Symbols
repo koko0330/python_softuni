@@ -1,0 +1,15 @@
+text = input()
+
+char_dict = {}
+
+for i in text:
+    if i not in char_dict:
+        char_dict[i] = 1
+    else:
+        char_dict[i] += 1
+
+
+char_dict = dict(sorted(char_dict.items(), key=lambda x: x[0]))
+
+for key, value in char_dict.items():
+    print(f"{key}: {value} time/s")
