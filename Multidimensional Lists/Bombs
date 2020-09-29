@@ -1,0 +1,64 @@
+matrix_size = int(input())
+
+matrix = []
+
+for i in range(matrix_size):
+    data = list(map(int, input().split()))
+    matrix.append([])
+    for j in range(matrix_size):
+        matrix[i].append(data[j])
+
+bomb_coordinates = list(input().split())
+
+bomb_matrix = []
+
+for i, v in enumerate(bomb_coordinates):
+    tokens = v.split(",")
+    row_bomb = int(tokens[0])
+    col_bomb = int(tokens[1])
+    bomb_matrix.append([])
+    for j in range(len(tokens) - 1):
+        bomb_matrix[i].append(row_bomb)
+        bomb_matrix[i].append(col_bomb)
+
+for i in bomb_matrix:
+    row = int(i[0])
+    col = int(i[1])
+    bomb = matrix[row][col]
+
+    if bomb > 0:
+        matrix[row][col] = 0
+
+        if col + 1 < matrix_size and matrix[row][col + 1] > 0:
+            matrix[row][col + 1] -= bomb
+        if col - 1 >= 0 and matrix[row][col - 1] > 0:
+            matrix[row][col - 1] -= bomb
+        if row + 1 < matrix_size and matrix[row + 1][col] > 0:
+            matrix[row + 1][col] -= bomb
+        if row - 1 >= 0 and matrix[row - 1][col] > 0:
+            matrix[row - 1][col] -= bomb
+        if row - 1 >= 0 and col + 1 < matrix_size and matrix[row - 1][col + 1] > 0:
+            matrix[row - 1][col + 1] -= bomb
+        if row - 1 >= 0 and col - 1 >= 0 and matrix[row - 1][col - 1] > 0:
+            matrix[row - 1][col - 1] -= bomb
+        if row + 1 < matrix_size and col + 1 < matrix_size and matrix[row + 1][col + 1] > 0:
+            matrix[row + 1][col + 1] -= bomb
+        if row + 1 < matrix_size and col - 1 >= 0 and matrix[row + 1][col - 1] > 0:
+            matrix[row + 1][col - 1] -= bomb
+
+alive_cells = 0
+sum_alive_cells = 0
+
+for i in matrix:
+    for cell in i:
+        if cell > 0:
+            alive_cells += 1
+            sum_alive_cells += cell
+
+print(f"Alive cells: {alive_cells}")
+print(f"Sum: {sum_alive_cells}")
+
+for j in matrix:
+    row_to_print = list(map(str, j))
+    row_to_print = " ".join(row_to_print)
+    print(row_to_print)
