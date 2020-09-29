@@ -1,0 +1,19 @@
+rows_count, cols_count = tuple(map(int, input().split()))
+
+matrix = [['a'] * cols_count for row in range(rows_count)]
+
+found = 0
+
+for i in range(rows_count):
+    data = input().split()
+
+    for j in range(cols_count):
+        matrix[i][j] = data[j]
+
+        if j - 1 >= 0 and i - 1 >= 0:
+            if matrix[i][j] == matrix[i][j - 1] and \
+                    matrix[i][j] == matrix[i - 1][j] and \
+                    matrix[i][j] == matrix[i - 1][j - 1]:
+                found += 1
+
+print(found)
