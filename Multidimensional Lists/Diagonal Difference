@@ -1,0 +1,20 @@
+n = int(input())
+
+matrix = []
+
+for _ in range(n):
+    data = list(map(int, input().split()))
+    matrix.append(data)
+
+sum_primary_diagonal = 0
+
+for i, j in enumerate(matrix):
+    sum_primary_diagonal += j[i]
+
+
+sum_other_diagonal = 0
+
+for i, j in enumerate(matrix):
+    sum_other_diagonal += j[len(matrix) - 1 - i]
+
+print(abs(sum_primary_diagonal - sum_other_diagonal))
