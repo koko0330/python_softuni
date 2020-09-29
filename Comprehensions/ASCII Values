@@ -1,0 +1,5 @@
+list_items = list(input().split(", "))
+
+dictionary = {key:ord(key) for key in list_items}
+
+print(dictionary)
