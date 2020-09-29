@@ -1,0 +1,14 @@
+text = input()
+
+vowels = ["a", "o", "e", "i", "u"]
+
+final_text = ""
+
+for ch in text:
+    if ch in vowels:
+        ch = ""
+        final_text += ch
+    else:
+        final_text += ch
+
+print(final_text)
