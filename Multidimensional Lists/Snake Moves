@@ -1,0 +1,19 @@
+from collections import deque
+
+rows, cols = tuple(map(int, input().split()))
+
+snake = deque(list(input()))
+
+matrix = []
+
+for i in range(rows):
+    s = ''
+    for j in range(cols):
+        piece = snake.popleft()
+        s += piece
+        snake.append(piece)
+
+    if i % 2 == 0:
+        print(s)
+    else:
+        print(s[::-1])
