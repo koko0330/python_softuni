@@ -1,0 +1,11 @@
+numbers = [int(x) for x in input().split(", ")]
+
+positives = ", ".join(list(map(str, [x for x in numbers if x >= 0])))
+negatives = ", ".join(list(map(str, [x for x in numbers if x < 0])))
+even = ", ".join(list(map(str, [x for x in numbers if x % 2 == 0])))
+odd = ", ".join(list(map(str, [x for x in numbers if x % 2 != 0])))
+
+print(f"Positive: {positives}")
+print(f"Negative: {negatives}")
+print(f"Even: {even}")
+print(f"Odd: {odd}")
