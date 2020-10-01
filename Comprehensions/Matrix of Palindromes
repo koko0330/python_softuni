@@ -1,0 +1,15 @@
+r, c = [int(x) for x in input().split()]
+
+matrix_final = []
+
+for i in range(r):
+    to_append = ""
+    matrix_final.append([])
+    for j in range(c):
+        to_append += chr(97 + i) + chr(97 + j + i) + chr(97 + i)
+        matrix_final[i].append(to_append)
+        to_append = ""
+
+for row in matrix_final:
+    row = " ".join(row)
+    print(row)
