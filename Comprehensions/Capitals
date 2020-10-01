@@ -1,0 +1,6 @@
+pairs = tuple(zip(input().split(", "), input().split(", ")))
+
+countries_dict = {key:value for key, value in pairs}
+
+for key, value in countries_dict.items():
+    print(f"{key} -> {value}")
