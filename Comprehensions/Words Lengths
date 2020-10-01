@@ -1,0 +1,17 @@
+text = input().split(", ")
+
+lengths = {}
+
+for key in text:
+    if key not in lengths:
+        lengths[key] = len(key)
+
+string_to_print = ""
+
+for k, v in lengths.items():
+    string_to_print += f"{k} -> {v}, "
+
+string_to_print = string_to_print[::-1]
+string_to_print = string_to_print.replace(" ,", "", 1)
+string_to_print = string_to_print[::-1]
+print(string_to_print)
