@@ -1,0 +1,31 @@
+item_categories = input().split(", ")
+n = int(input())
+
+sum_of_items = 0
+total_quality = 0
+categories_counter = 0
+
+item_dict = {item_categories[i]: [] for i in range(len(item_categories))}
+
+for i in range(n):
+    line = input().split(" - ")
+
+    category = line[0]
+    product = line[1]
+    tokens = line[2].split(";")
+    item_quantity_info = tokens[0].split(":")
+    item_quantity = int(item_quantity_info[1])
+    item_quality_info = tokens[1].split(":")
+    item_quality = int(item_quality_info[1])
+
+    sum_of_items += item_quantity
+    total_quality += item_quality
+
+    if product not in item_dict[category]:
+        item_dict[category].append(product)
+
+
+print(f"Count of items: {sum_of_items}")
+print(f"Average quality: {total_quality / len(item_categories):.2f}")
+
+[print(f"{key} -> {', '.join(value)}") for key, value in item_dict.items()]
