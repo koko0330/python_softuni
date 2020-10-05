@@ -1,0 +1,11 @@
+def print_even(numbers):
+    positives = []
+    for i in numbers:
+        if i % 2 == 0:
+            positives.append(i)
+
+    return positives
+
+
+numbers = list(map(int, input().split()))
+print(print_even(numbers))
