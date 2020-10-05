@@ -1,0 +1,33 @@
+def operate(operator, *numbers):
+    if operator == "+" or operator == "-" or operator == "/":
+        result = 0
+
+    else:
+        result = 1
+
+    if operator == "+":
+        for i in numbers:
+            result += i
+
+    elif operator == "-":
+        for i in range(len(numbers) - 1):
+            if i == 0:
+                result = numbers[i] - numbers[i + 1]
+            else:
+                result -= numbers[i + 1]
+
+    elif operator == "*":
+        for i in numbers:
+            result *= i
+
+    elif operator == "/":
+        for i in range(len(numbers) - 1):
+            if i == 0:
+                result = numbers[i] / numbers[i + 1]
+            else:
+                result /= numbers[i + 1]
+
+    return result
+
+
+print(operate("*", 3, 4))
