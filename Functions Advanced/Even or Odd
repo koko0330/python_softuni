@@ -1,0 +1,26 @@
+def even_odd(*args):
+    list_numbers = []
+    command = ''
+    for i in args:
+        if i == "even":
+            command = i
+
+        elif i == "odd":
+            command = i
+
+        else:
+            list_numbers.append(int(i))
+
+    if command == "even":
+        final_list = []
+        for j in list_numbers:
+            if j % 2 == 0:
+                final_list.append(j)
+
+    else:
+        final_list = []
+        for j in list_numbers:
+            if j % 2 != 0:
+                final_list.append(j)
+
+    return final_list
