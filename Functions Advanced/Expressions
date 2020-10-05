@@ -1,0 +1,11 @@
+import itertools
+
+numbers = list(map(str, input().split(", ")))
+n = len(numbers)
+
+permutations = itertools.product("-+", repeat=n)
+
+for permutation in permutations:
+    expr = "".join(itertools.chain(*zip(permutation, numbers)))
+    res = eval(expr)
+    print(f"{expr}={res}")
