@@ -1,0 +1,30 @@
+def get_sum_of_positives(numbers):
+    total_sum_positives = 0
+    for i in numbers:
+        if i >= 0:
+            total_sum_positives += i
+
+    return total_sum_positives
+
+
+def get_sum_of_negatives(numbers):
+    total_sum_negatives = 0
+    for i in numbers:
+        if i < 0:
+            total_sum_negatives += i
+
+    return total_sum_negatives
+
+
+def get_difference(get_sum_of_positives, get_sum_of_negatives):
+
+    if get_sum_of_positives > abs(get_sum_of_negatives):
+        return "The positives are stronger than the negatives"
+    else:
+        return "The negatives are stronger than the positives"
+
+
+numbers = list(map(int, input().split()))
+print(get_sum_of_negatives(numbers))
+print(get_sum_of_positives(numbers))
+print(get_difference(get_sum_of_positives(numbers), get_sum_of_negatives(numbers)))
