@@ -1,0 +1,23 @@
+def get_sum(command, numbers):
+    if command == "Odd":
+        sum = 0
+        for i in numbers:
+            if i % 2 != 0:
+                sum += i
+
+        final_sum = sum * len(numbers)
+
+    else:
+        sum = 0
+        for i in numbers:
+            if i % 2 == 0:
+                sum += i
+
+        final_sum = sum * len(numbers)
+
+    return final_sum
+
+
+command = input()
+numbers = list(map(int, input().split()))
+print(get_sum(command, numbers))
