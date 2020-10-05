@@ -1,0 +1,9 @@
+text = list(map(float, input().split()))
+
+final_list = []
+
+for i in text:
+    i = abs(i)
+    final_list.append(i)
+
+print(final_list)
