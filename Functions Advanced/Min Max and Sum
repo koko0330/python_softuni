@@ -1,0 +1,23 @@
+def get_min(numbers):
+    min_num = min(numbers)
+
+    return f"The minimum number is {min_num}"
+
+
+def get_max(numbers):
+    max_num = max(numbers)
+
+    return f"The maximum number is {max_num}"
+
+
+def get_sum(numbers):
+    sum_nums = sum(numbers)
+
+    return f"The sum number is: {sum_nums}"
+
+
+numbers = list(map(int, input().split()))
+
+print(get_min(numbers))
+print(get_max(numbers))
+print(get_sum(numbers))
