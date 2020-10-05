@@ -1,0 +1,8 @@
+def print_sorted(numbers):
+    numbers = list(sorted((numbers)))
+
+    return numbers
+
+
+numbers = list(map(int, input().split()))
+print(print_sorted(numbers))
