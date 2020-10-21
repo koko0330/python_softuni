@@ -1,0 +1,18 @@
+def get_magic_triangle(n):
+    matrix = []
+
+    for i in range(n):
+        row = []
+        matrix.append(row)
+        for j in range(-n + i + 1, 1):
+            matrix[i].append(1)
+
+    matrix_final = list(reversed(matrix))
+
+    for j, v in enumerate(matrix_final):
+        if len(v) > 2:
+            for k in range(len(v) - 1):
+                if j - 1 >= 0 and k + 1 < len(v) - 1:
+                    matrix_final[j][k + 1] = matrix_final[j - 1][k] + matrix_final[j - 1][k + 1]
+
+    return matrix_final
