@@ -1,0 +1,12 @@
+def fix_calendar(numbers):
+    swap = 0
+    while True:
+        for i in range(len(numbers) - 1):
+            if numbers[i] > numbers[i + 1]:
+                swap += 1
+                numbers[i], numbers[i + 1] = numbers[i + 1], numbers[i]
+        if swap == 0:
+            break
+        swap = 0
+
+    return numbers
