@@ -1,0 +1,43 @@
+move_up, move_down, move_left, move_right = [-1, 0], [1, 0], [0, -1], [0, 1]
+collected_letters = list(input())
+n = int(input())
+field = []
+for _ in range(n):
+    field.append([x for x in list(input())])
+moves = int(input())
+# find starting position
+starting_position = []
+for row in range(n):
+    for col in range(n):
+        if field[row][col] == "P":
+            starting_position = [row, col]
+ 
+for _ in range(moves):
+    command = input()
+    player_row = starting_position[0]
+    player_col = starting_position[1]
+    player_next_moves = []
+    if command == "up":
+        player_next_moves = [move_up[0] + player_row, move_up[1] + player_col]
+    elif command == "down":
+        player_next_moves = [move_down[0] + player_row, move_down[1] + player_col]
+    elif command == "left":
+        player_next_moves = [move_left[0] + player_row, move_left[1] + player_col]
+    elif command == "right":
+        player_next_moves = [move_right[0] + player_row, move_right[1] + player_col]
+    next_player_row = player_next_moves[0]
+    next_player_col = player_next_moves[1]
+    if 0 <= next_player_row < n and 0 <= next_player_col < n:
+        if field[next_player_row][next_player_col] == '-':
+            field[player_row][player_col] = '-'
+            field[next_player_row][next_player_col] = 'P'
+        else:
+            collected_letters.append(field[next_player_row][next_player_col])
+            field[player_row][player_col] = '-'
+            field[next_player_row][next_player_col] = 'P'
+        starting_position = [next_player_row, next_player_col]
+    else:
+        if collected_letters:
+            collected_letters.pop()
+print(''.join(collected_letters))
+[print(''.join(row)) for row in field]
