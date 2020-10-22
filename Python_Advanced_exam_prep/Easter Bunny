@@ -1,0 +1,45 @@
+import sys
+
+field_size = int(input())
+field = []
+starting_position = []
+for row in range(field_size):
+    line = input().split()
+    if "B" in line:
+        starting_position = [row, line.index("B")]
+    field.append(line)
+directions = ['up', 'down', 'left', 'right']
+moves = [[-1, 0], [1, 0], [0, -1], [0, 1]]
+count_moves = 0
+max_path_coordinates = []
+maximum_sum = -sys.maxsize
+direction = None
+while count_moves < 4:
+    current_sum = 0
+    current_path = []
+    start_row = starting_position[0]
+    start_col = starting_position[1]
+    next_row = moves[count_moves][0]
+    next_col = moves[count_moves][1]
+
+    if not 0 <= start_row + next_row < field_size or not 0 <= start_col + next_col < field_size:
+        count_moves += 1
+        continue
+
+    while 0 <= start_row < field_size and 0 <= start_col < field_size:
+        current_cell = field[start_row][start_col]
+        if current_cell != 'B' and current_cell != 'X':
+            current_sum += int(current_cell)
+            current_path.append([start_row, start_col])
+        elif current_cell == 'X':
+            break
+        start_row += next_row
+        start_col += next_col
+    if current_sum > maximum_sum:
+        maximum_sum = current_sum
+        max_path_coordinates = current_path
+        direction = count_moves
+    count_moves += 1
+print(directions[direction])
+[print(row) for row in max_path_coordinates]
+print(maximum_sum)
