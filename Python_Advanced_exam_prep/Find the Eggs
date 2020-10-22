@@ -1,0 +1,25 @@
+def find_strongest_eggs(*args):
+    final_list = []
+    if args[1] > 1:
+        matrix = []
+        iterations = 0
+        for i in range(args[1]):
+            matrix.append([])
+            for j in range(i, len(args[0]), args[1]):
+                matrix[i].append(args[0][j])
+
+        for i in matrix:
+            middle = i[len(i) // 2]
+            next_egg = i[len(i) // 2 + 1]
+            previous_egg = i[len(i) // 2 - 1]
+            if middle > next_egg and middle > previous_egg and next_egg > previous_egg:
+                final_list.append(middle)
+    else:
+        middle = args[0][len(args[0]) // 2]
+        next_egg = args[0][len(args[0]) // 2 + 1]
+        previous_egg = args[0][len(args[0]) // 2 - 1]
+        if middle > next_egg and middle > previous_egg and next_egg > previous_egg:
+            final_list.append(middle)
+
+
+    return final_list
