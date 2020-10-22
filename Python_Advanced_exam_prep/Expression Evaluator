@@ -1,0 +1,54 @@
+from collections import deque
+
+text = deque(input().split())
+
+operators = ["*", "+", "-", "/"]
+
+expression = []
+result = 0
+
+while len(text) > 0:
+    item = text.popleft()
+
+    if item not in operators:
+        item = int(item)
+        expression.append(item)
+
+    else:
+        if item == "*":
+            result = expression[0]
+            for i in range(1, len(expression)):
+                result *= expression[i]
+            text.appendleft(result)
+            result = 0
+            expression = []
+            if len(text) == 1:
+                break
+        elif item == "+":
+            result = sum(expression)
+            text.appendleft(result)
+            result = 0
+            expression = []
+            if len(text) == 1:
+                break
+        elif item == "-":
+            result = expression[0]
+            for i in range(1, len(expression)):
+                result -= expression[i]
+            text.appendleft(result)
+            result = 0
+            expression = []
+            if len(text) == 1:
+                break
+        elif item == "/":
+            result = expression[0]
+            for i in range(1, len(expression)):
+                result //= expression[i]
+            text.appendleft(result)
+            result = 0
+            expression = []
+            if len(text) == 1:
+                break
+
+for i in text:
+    print(i)
