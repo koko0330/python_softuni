@@ -1,0 +1,100 @@
+n = int(input())
+
+matrix = [["." for x in range(n)] for y in range(n)]
+
+plane_position = []
+target_positions = []
+
+targets_destroyed = 0
+
+for i in range(n):
+    line = input().split()
+    for j in range(len(line)):
+        matrix[i][j] = line[j]
+        if matrix[i][j] == "p":
+            plane_position = [i, j]
+        if matrix[i][j] == "t":
+            target_positions.append([i, j])
+
+moves = int(input())
+
+
+for k in range(moves):
+    command = input().split()
+    action = command[0]
+    direction = command[1]
+    steps = int(command[2])
+
+    if "move" in command:
+
+        if direction == "right":
+            if 0 <= plane_position[1] + steps < n and matrix[plane_position[0]][plane_position[1] + steps] == ".":
+                matrix[plane_position[0]][plane_position[1] + steps] = "p"
+                matrix[plane_position[0]][plane_position[1]] = "."
+                plane_position = [plane_position[0], plane_position[1] + steps]
+
+        elif direction == "left":
+            if 0 <= plane_position[1] - steps < n and matrix[plane_position[0]][plane_position[1] - steps] == ".":
+                matrix[plane_position[0]][plane_position[1] - steps] = "p"
+                matrix[plane_position[0]][plane_position[1]] = "."
+                plane_position = [plane_position[0], plane_position[1] - steps]
+
+        elif direction == "down":
+            if 0 <= plane_position[0] + steps < n and matrix[plane_position[0] + steps][plane_position[1]] == ".":
+                matrix[plane_position[0] + steps][plane_position[1]] = "p"
+                matrix[plane_position[0]][plane_position[1]] = "."
+                plane_position = [plane_position[0] + steps , plane_position[1]]
+
+        elif direction == "up":
+            if 0 <= plane_position[0] - steps < n and matrix[plane_position[0] - steps][plane_position[1]] == ".":
+                matrix[plane_position[0] - steps][plane_position[1]] = "p"
+                matrix[plane_position[0]][plane_position[1]] = "."
+                plane_position = [plane_position[0] - steps, plane_position[1]]
+
+    elif "shoot" in command:
+
+        if direction == "right":
+            if 0 <= plane_position[1] + steps < n and matrix[plane_position[0]][plane_position[1] + steps] != "p":
+                if matrix[plane_position[0]][plane_position[1] + steps] == "t":
+                    target_positions.pop()
+                    targets_destroyed += 1
+                matrix[plane_position[0]][plane_position[1] + steps] = "x"
+                if len(target_positions) == 0:
+                    break
+
+        elif direction == "left":
+            if 0 <= plane_position[1] - steps < n and matrix[plane_position[0]][plane_position[1] - steps] != "p":
+                if matrix[plane_position[0]][plane_position[1] - steps] == "t":
+                    target_positions.pop()
+                    targets_destroyed += 1
+                matrix[plane_position[0]][plane_position[1] - steps] = "x"
+                if len(target_positions) == 0:
+                    break
+
+        elif direction == "down":
+            if 0 <= plane_position[0] + steps < n and matrix[plane_position[0] + steps][plane_position[1]] != "p":
+                if matrix[plane_position[0] + steps][plane_position[1]] == "t":
+                    target_positions.pop()
+                    targets_destroyed += 1
+                matrix[plane_position[0] + steps][plane_position[1]] = "x"
+                if len(target_positions) == 0:
+                    break
+
+        elif direction == "up":
+            if 0 <= plane_position[0] - steps < n and matrix[plane_position[0] - steps][plane_position[1]] != "p":
+                if matrix[plane_position[0] - steps][plane_position[1]] == "t":
+                    target_positions.pop()
+                    targets_destroyed += 1
+                matrix[plane_position[0] - steps][plane_position[1]] = "x"
+                if len(target_positions) == 0:
+                    break
+
+
+if len(target_positions) == 0:
+    print(f"Mission accomplished! All {targets_destroyed} targets destroyed.")
+else:
+    print(f"Mission failed! {len(target_positions)} targets left.")
+
+for line in matrix:
+    line = " ".join(line)
+    print(line)
