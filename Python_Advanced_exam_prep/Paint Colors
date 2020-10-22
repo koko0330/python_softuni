@@ -1,0 +1,67 @@
+from collections import deque
+
+line = deque(input().split())
+
+main_colors = ["red", "yellow", "blue"]
+secondary_colors = ["orange", "purple", "green"]
+
+final_list = []
+
+while len(line) > 0:
+    if len(line) > 1:
+        first = line[0]
+        last = line[-1]
+        color_one = first + last
+        color_two = last + first
+
+        if color_one in main_colors:
+            line.pop()
+            line.popleft()
+            final_list.append(color_one)
+        elif color_two in main_colors:
+            line.pop()
+            line.popleft()
+            final_list.append(color_two)
+        elif color_one in secondary_colors:
+            line.pop()
+            line.popleft()
+            final_list.append(color_one)
+        elif color_two in secondary_colors:
+            line.pop()
+            line.popleft()
+            final_list.append(color_two)
+        else:
+            if len(line) > 1:
+                line.pop()
+                line.popleft()
+                first = first[0:-1]
+                last = last[0:-1]
+                middle = len(line) // 2
+                if first != "":
+                    line.insert(middle, first)
+                if last != "":
+                    line.insert(middle, last)
+            elif len(line) == 1:
+                line.pop()
+
+    else:
+        if line[0] in main_colors:
+            final_list.append(line[0])
+            line.pop()
+        elif line[0] in secondary_colors:
+            final_list.append(line[0])
+            line.pop()
+        else:
+            line.pop()
+
+if "orange" in final_list and ("red" not in final_list or "yellow" not in final_list):
+    final_list.remove("orange")
+
+elif "purple" in final_list and ("red" not in final_list or "blue" not in final_list):
+    final_list.remove("purple")
+
+elif "green" in final_list and ("yellow" not in final_list or "blue" not in final_list):
+    final_list.remove("green")
+
+
+print(final_list)
