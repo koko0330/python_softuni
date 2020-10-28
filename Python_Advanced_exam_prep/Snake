@@ -1,0 +1,69 @@
+def is_valid(pos, size):
+    return 0 <= pos[0] < size and 0 <= pos[1] < size
+
+
+n = int(input())
+
+matrix = []
+snake_pos = []
+burrows_pos = []
+
+for i in range(n):
+    line = list(input())
+    for j in range(n):
+        if line[j] == 'S':
+            snake_pos = [i, j]
+        elif line[j] == 'B':
+            burrows_pos.append([i, j])
+    matrix.append(line)
+
+directions = {"up": (-1, 0), "right": (0, 1), "down": (1, 0), "left": (0, -1)}
+food_quantity = 0
+out_of_territory = False
+
+while True:
+    command = input()
+    dir_changes = directions[command]
+    new_pos = [snake_pos[0] + dir_changes[0], snake_pos[1] + dir_changes[1]]
+
+    if is_valid(new_pos, n):
+        if matrix[new_pos[0]][new_pos[1]] == "*":
+            food_quantity += 1
+            matrix[snake_pos[0]][snake_pos[1]] = "."
+            matrix[new_pos[0]][new_pos[1]] = "S"
+            snake_pos = new_pos
+
+        elif matrix[new_pos[0]][new_pos[1]] == "B":
+            if new_pos == burrows_pos[0]:
+                matrix[snake_pos[0]][snake_pos[1]] = "."
+                matrix[burrows_pos[0][0]][burrows_pos[0][1]] = "."
+                matrix[burrows_pos[1][0]][burrows_pos[1][1]] = "S"
+                snake_pos = burrows_pos[1]
+            elif new_pos == burrows_pos[1]:
+                matrix[snake_pos[0]][snake_pos[1]] = "."
+                matrix[burrows_pos[1][0]][burrows_pos[1][1]] = "."
+                matrix[burrows_pos[0][0]][burrows_pos[0][1]] = "S"
+                snake_pos = burrows_pos[0]
+
+        else:
+            matrix[snake_pos[0]][snake_pos[1]] = "."
+            matrix[new_pos[0]][new_pos[1]] = "S"
+            snake_pos = new_pos
+
+        if food_quantity >= 10:
+            print("You won! You fed the snake.")
+            print(f"Food eaten: {food_quantity}")
+
+            break
+
+    else:
+        out_of_territory = True
+        matrix[snake_pos[0]][snake_pos[1]] = "."
+        print("Game over!")
+        print(f"Food eaten: {food_quantity}")
+        break
+
+for i in matrix:
+    i = "".join(i)
+    print(i)
+print()
