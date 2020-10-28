@@ -1,0 +1,53 @@
+from collections import deque
+
+bomb_effects = deque(map(int, input().split(", ")))
+
+bomb_casings = list(map(int, input().split(", ")))
+
+bombs_dics = {"Datura Bombs": 40, "Cherry Bombs": 60, "Smoke Decoy Bombs": 120}
+datura_bombs = 0
+cherry_bombs = 0
+smoke_bombs = 0
+
+while True:
+    first_bomb_effect = bomb_effects[0]
+    last_bomb_casing = bomb_casings[-1]
+    value = first_bomb_effect + last_bomb_casing
+
+    if first_bomb_effect + last_bomb_casing in bombs_dics.values():
+        bomb_effects.popleft()
+        bomb_casings.pop()
+        if value == 40:
+            datura_bombs += 1
+        elif value == 60:
+            cherry_bombs += 1
+        elif value == 120:
+            smoke_bombs += 1
+    else:
+        bomb_casings.append(bomb_casings.pop() - 5)
+
+    if len(bomb_casings) <= 0 or len(bomb_effects) <= 0 or (datura_bombs >= 3 and cherry_bombs >= 3 and smoke_bombs >= 3):
+        break
+
+if datura_bombs >= 3 and cherry_bombs >= 3 and smoke_bombs >= 3:
+    print("Bene! You have successfully filled the bomb pouch!")
+else:
+    print("You don't have enough materials to fill the bomb pouch.")
+
+if len(bomb_effects) > 0:
+    bomb_effects = list(map(str, bomb_effects))
+    bomb_effects = ", ".join(bomb_effects)
+    print(f"Bomb Effects: {bomb_effects}")
+else:
+    print("Bomb Effects: empty")
+
+if len(bomb_casings) > 0:
+    bomb_casings = list(map(str, bomb_casings))
+    bomb_casings = ", ".join(bomb_casings)
+    print(f"Bomb Casings: {bomb_casings}")
+else:
+    print("Bomb Casings: empty")
+
+print(f"Cherry Bombs: {cherry_bombs}")
+print(f"Datura Bombs: {datura_bombs}")
+print(f"Smoke Decoy Bombs: {smoke_bombs}")
