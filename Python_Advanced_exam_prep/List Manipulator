@@ -1,0 +1,26 @@
+def list_manipulator(*args):
+    numbers = list(args[0])
+    if args[1] == "add" and args[2] == "beginning":
+        iterator = 0
+        for num in range(3, len(args)):
+            numbers.insert(0 + iterator, args[num])
+            iterator += 1
+    elif args[1] == "add" and args[2] == "end":
+        for num in range(3, len(args)):
+            numbers.append(args[num])
+
+    elif args[1] == "remove" and args[2] == "beginning":
+        if len(args) > 3:
+            for i in range(args[3]):
+                numbers.pop(0)
+        else:
+            numbers.pop(0)
+
+    elif args[1] == "remove" and args[2] == "end":
+        if len(args) > 3:
+            for i in range(args[3]):
+                numbers.pop()
+        else:
+            numbers.pop()
+
+    return numbers
