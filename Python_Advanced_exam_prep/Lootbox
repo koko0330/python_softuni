@@ -1,0 +1,41 @@
+from collections import deque
+
+first_loot_box = deque(map(int, input().split()))
+
+second_loot_box = list(map(int, input().split()))
+
+collected_items = []
+
+first_empty = False
+second_empty = False
+
+while True:
+    first = first_loot_box.popleft()
+    second = second_loot_box.pop()
+
+    summed = first + second
+
+    if summed % 2 == 0:
+        collected_items.append(summed)
+
+    else:
+        first_loot_box.appendleft(first)
+        first_loot_box.append(second)
+
+    if not first_loot_box:
+        first_empty = True
+        break
+    if not second_loot_box:
+        second_empty = True
+        break
+
+if first_empty:
+    print("First lootbox is empty")
+
+if second_empty:
+    print("Second lootbox is empty")
+
+if sum(collected_items) >= 100:
+    print(f"Your loot was epic! Value: {sum(collected_items)}")
+else:
+    print(f"Your loot was poor... Value: {sum(collected_items)}")
