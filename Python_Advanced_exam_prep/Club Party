@@ -1,0 +1,23 @@
+from collections import deque
+
+max_capacity = int(input())
+
+line = input().split()
+open_halls = deque()
+people = []
+
+
+while line:
+    elem = line.pop()
+
+    if elem.isalpha():
+        open_halls.append(elem)
+    else:
+        if open_halls:
+            if sum(people) + int(elem) <= max_capacity:
+                people.append(int(elem))
+            else:
+                print(f"{open_halls[0]} -> {', '.join(str(x) for x in people)}")
+                open_halls.popleft()
+                people = []
+                line.append(elem)
