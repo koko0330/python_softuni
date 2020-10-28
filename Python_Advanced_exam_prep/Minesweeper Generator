@@ -1,0 +1,42 @@
+def is_bomb(next_box, n, matrix):
+    return 0 <= next_box[0] < n and 0 <= next_box[1] < n and matrix[next_box[0]][next_box[1]] == "*"
+
+
+n = int(input())
+bombs_count = int(input())
+
+matrix = [[0 for row in range(n)] for col in range(n)]
+
+directions = {
+    "up": (-1, 0),
+    "down": (1, 0),
+    "left": (0, -1),
+    "right": (0, 1),
+    "up_right": (-1, 1),
+    "up_left": (-1, -1),
+    "down_right": (1, 1),
+    "down_left": (1, -1),
+}
+
+for i in range(bombs_count):
+    bomb_pos = input().strip("()").split(", ")
+    bomb_x = int(bomb_pos[0])
+    bomb_y = int(bomb_pos[1])
+    matrix[bomb_x][bomb_y] = "*"
+
+for x, row in enumerate(matrix):
+    for y, box in enumerate(row):
+        if box != "*":
+            box_x = x
+            box_y = y
+
+            for direction in directions:
+                dir_changes = directions[direction]
+                next_box = [box_x + dir_changes[0], box_y + dir_changes[1]]
+                if is_bomb(next_box, n, matrix):
+                    matrix[box_x][box_y] += 1
+
+for line in matrix:
+    line = list(map(str, line))
+    line = " ".join(line)
+    print(line)
