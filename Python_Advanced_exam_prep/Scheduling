@@ -1,0 +1,27 @@
+import sys
+
+jobs = list(map(int, input().split(", ")))
+job_index = int(input())
+
+total_cycles = 0
+min_job = sys.maxsize
+
+
+while True:
+    max_num = sys.maxsize
+    for i in jobs:
+        if i < min_job:
+            min_job = i
+
+    total_cycles += min_job
+    if jobs.index(min_job) == job_index:
+        break
+
+    for i, v in enumerate(jobs):
+        if v == min_job:
+            jobs[i] = sys.maxsize
+            break
+
+    min_job = sys.maxsize
+
+print(total_cycles)
