@@ -1,0 +1,51 @@
+def is_valid(pos_changes):
+    return 0 <= current_queen_pos[0] < board_size and 0 <= current_queen_pos[1] < board_size
+
+
+board_size = 8
+
+board = []
+king_pos = []
+queens_pos = []
+
+winners = []
+
+for i in range(board_size):
+    row = input().split()
+    for j in range(len(row)):
+        if row[j] == "K":
+            king_pos = [i, j]
+        elif row[j] == "Q":
+            queens_pos .append([i, j])
+    board.append(row)
+
+directions = {"up": (-1, 0),
+              "down": (1, 0),
+              "left": (0, -1),
+              "right": (0, 1),
+              "upright": (-1, 1),
+              "upleft": (-1, -1),
+              "downright": (1, 1),
+              "downleft": (1, -1)
+              }
+
+
+for queen in range(len(queens_pos)):
+    current_queen = queens_pos[queen]
+    for direction in directions:
+        dir_changes = directions[direction]
+        current_queen_pos = current_queen
+        while is_valid(current_queen_pos):
+            pos_changes = [current_queen_pos[0] + dir_changes[0], current_queen_pos[1] + dir_changes[1]]
+            current_queen_pos = [pos_changes[0], pos_changes[1]]
+            if is_valid(current_queen_pos):
+                if board[current_queen_pos[0]][current_queen_pos[1]] == "K":
+                    winners.append(current_queen)
+                elif board[current_queen_pos[0]][current_queen_pos[1]] == "Q":
+                    break
+
+if len(winners) > 0:
+    for i in winners:
+        print(i)
+else:
+    print("The king is safe!")
