@@ -1,0 +1,20 @@
+def numbers_searching(*args):
+    smallest = min(args)
+    biggest = max(args)
+    missing_number = 0
+    for i in args:
+        if i + 1 not in args and smallest < i + 1 < biggest:
+            missing_number = i + 1
+
+    repeating_numbers = []
+    numbers = []
+    for i in args:
+        if i not in numbers and smallest <= i <= biggest:
+            numbers.append(i)
+        else:
+            if i not in repeating_numbers and smallest <= i <= biggest:
+                repeating_numbers.append(i)
+
+    repeating_numbers = sorted(repeating_numbers)
+
+    return [missing_number, repeating_numbers]
