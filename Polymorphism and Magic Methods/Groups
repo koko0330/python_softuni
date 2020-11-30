@@ -1,0 +1,38 @@
+from typing import List
+
+
+class Person:
+    def __init__(self, name, surname):
+        self.name = name
+        self.surname = surname
+
+    def __add__(self, other):
+        if not isinstance(other, self.__class__):
+            raise TypeError("unsupported operand types")
+
+        return Person(name=self.name, surname=other.surname)
+
+    def __repr__(self):
+        return self.name + " " + self.surname
+
+
+class Group:
+    name: str
+    people: List[Person]
+
+    def __init__(self, name, people):
+        self.name = name
+        self.people = people
+
+    def __add__(self, other):
+        return Group("ToDo", people=self.people + other.people)
+
+    def __len__(self):
+        return len(self.people)
+
+    def __repr__(self):
+        return f"Group {self.name} with members {', '.join([f'{p.name} {p.surname}' for p in self.people])}"
+
+    def __getitem__(self, key: int):
+        full_name = self.people[key].name + " " + self.people[key].surname
+        return f"Person {key}: {full_name}"
