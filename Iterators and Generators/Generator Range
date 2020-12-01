@@ -1,0 +1,5 @@
+def genrange(start, end):
+    i = start
+    while i <= end:
+        yield i
+        i += 1
