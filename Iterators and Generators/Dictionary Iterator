@@ -1,0 +1,20 @@
+from typing import Dict
+
+
+class dictionary_iter:
+    dictionary: Dict
+
+    def __init__(self, dictionary):
+        self.dictionary = dictionary
+        self.idx = 0
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.idx < len(self.dictionary):
+            self.idx += 1
+            dictionary = zip(self.dictionary.keys(), self.dictionary.values())
+            return tuple(dictionary)[0 + self.idx - 1]
+        else:
+            raise StopIteration()
