@@ -1,0 +1,20 @@
+class vowels:
+    def __init__(self, text):
+        self.text = text
+        self.i = 0
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        while self.i <= (len(self.text) - 1):
+            c = self.text[self.i]
+            self.i += 1
+            if self.is_vowel(c):
+                return c
+        raise StopIteration()
+
+    @staticmethod
+    def is_vowel(c):
+        vowels_list = "aeiuyo"
+        return c.lower() in vowels_list
