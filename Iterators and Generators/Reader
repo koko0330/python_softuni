@@ -1,0 +1,6 @@
+def read_next(*args):
+    reader = 0
+    while reader < len(args):
+        for el in args[reader]:
+            yield el
+        reader += 1
