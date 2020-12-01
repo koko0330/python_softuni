@@ -1,0 +1,18 @@
+def fibonacci():
+    i = 0
+    previous_i = 0
+    previous_sum = 0
+    while True:
+        if i == 0 and previous_i == 0:
+            yield i
+            yield i + 1
+            i += 1
+        elif i == 1 and previous_i == 0 or previous_i == 1:
+            yield i
+            i += 1
+            previous_i = i - 1
+        else:
+            yield i
+            previous_sum = previous_i + i
+            previous_i = i
+            i = previous_sum
