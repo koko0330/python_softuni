@@ -1,0 +1,16 @@
+def even_parameters(fn):
+    def wrapper(*args, **kwargs):
+        are_possible = bool
+        for i in args:
+            if isinstance(i, int) and i % 2 == 0:
+                are_possible = True
+            else:
+                are_possible = False
+                break
+        if are_possible:
+            res = fn(*args, **kwargs)
+            return res
+        else:
+            return "Please use only even numbers!"
+
+    return wrapper
