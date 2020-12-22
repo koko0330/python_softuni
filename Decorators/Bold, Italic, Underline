@@ -1,0 +1,21 @@
+def make_bold(fn):
+    def wrapper(*args, **kwargs):
+        res = fn(*args, **kwargs)
+        return f"<b>{res}</b>"
+    return wrapper
+
+
+def make_italic(fn):
+    def wrapper(*args, **kwargs):
+        res = fn(*args, **kwargs)
+        return f"<i>{res}</i>"
+
+    return wrapper
+
+
+def make_underline(fn):
+    def wrapper(*args, **kwargs):
+        res = fn(*args, **kwargs)
+        return f"<u>{res}</u>"
+
+    return wrapper
