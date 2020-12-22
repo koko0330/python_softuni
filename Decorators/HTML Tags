@@ -1,0 +1,7 @@
+def tags(tag):
+    def decorator(fn):
+        def wrapper(*args, **kwargs):
+            res = fn(*args, **kwargs)
+            return f"<{tag}>{res}</{tag}>"
+        return wrapper
+    return decorator
