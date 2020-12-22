@@ -1,0 +1,8 @@
+def logged(func):
+    def wrapper(*args, **kwargs):
+        res = func(*args, **kwargs)
+        return "\n".join([
+            f'you called {func.__name__}{args}',
+            f'it returned {res}'
+        ])
+    return wrapper
