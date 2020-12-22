@@ -1,0 +1,11 @@
+def type_check(type):
+    def decorator(fn):
+        def wrapper(*args, **kwargs):
+            for i in args:
+                if isinstance(i, type):
+                    res = fn(*args, **kwargs)
+                    return res
+                else:
+                    return "Bad Type"
+        return wrapper
+    return decorator
