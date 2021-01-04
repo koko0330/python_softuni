@@ -1,0 +1,54 @@
+import unittest
+
+
+class CarTests(unittest.TestCase):
+    def setUp(self):
+        self.car = Car("a", "b", 1, 4)
+
+    def test_if_car_is_costructed_properly(self):
+        self.assertEqual(self.car.make, "a")
+        self.assertEqual(self.car.model, "b")
+        self.assertEqual(self.car.fuel_consumption, 1)
+        self.assertEqual(self.car.fuel_capacity, 4)
+
+    def test_when_make_is_empty_throws_an_error(self):
+        with self.assertRaises(Exception):
+            self.car.make = ""
+
+    def test_when_model_is_empty_throws_an_error(self):
+        with self.assertRaises(Exception):
+            self.car.model = ""
+
+    def test_when_fuel_consumption_is_zero_or_less_throws_an_error(self):
+        with self.assertRaises(Exception):
+            self.car.fuel_consumption = -1
+
+    def test_when_fuel_capacity_is_zero_or_less_throws_an_error(self):
+        with self.assertRaises(Exception):
+            self.car.fuel_capacity = -1
+
+    def test_when_fuel_amount_is_zero_or_less_throws_an_error(self):
+        with self.assertRaises(Exception):
+            self.car.fuel_amount = -1
+
+    def test_if_refueling_with_zero_or_less_throws_error(self):
+        with self.assertRaises(Exception):
+            self.car.refuel(-1)
+
+    def test_refuel_more_than_capacity(self):
+        self.car.refuel(42)
+        self.assertEqual(self.car.fuel_amount, self.car.fuel_capacity)
+
+    def test_if_needed_fuel_more_than_what_we_have_raises_an_error(self):
+        with self.assertRaises(Exception) as exc:
+            self.car.drive(1000)
+        self.assertEqual(str(exc.exception), "You don't have enough fuel to drive!")
+
+    def test_fuel_amount_after_drive(self):
+        self.car.refuel(4)
+        self.car.drive(1)
+        self.assertEqual(self.car.fuel_amount, 3.99)
+
+
+if __name__ == "__main__":
+    unittest.main()
