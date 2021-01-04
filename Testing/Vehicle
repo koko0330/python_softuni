@@ -1,0 +1,57 @@
+import unittest
+
+
+class CarTests(unittest.TestCase):
+    def setUp(self):
+        self.car = Car(10, 1)
+
+    def test_if_car_is_instanced_properly(self):
+        self.assertEqual(self.car.fuel_quantity, 10)
+        self.assertEqual(self.car.fuel_consumption, 1)
+
+    def test_if_fuel_is_calculated_properly_after_driving_car_possible(self):
+        fuel_quantity = 100
+        fuel_consumption = 10
+        car = Car(fuel_quantity, fuel_consumption)
+        distance = 5
+        car.drive(distance)
+        fuel_left = fuel_quantity - (distance * (fuel_consumption + 0.9))
+        self.assertEqual(fuel_left, car.fuel_quantity)
+
+    def test_if_fuel_is_calculated_properly_after_driving_car_impossible(self):
+        self.car.drive(1000)
+        self.assertEqual(self.car.fuel_quantity, 10)
+
+    def test_if_refueling_is_working_car(self):
+        self.car.refuel(2)
+        self.assertEqual(self.car.fuel_quantity, 12)
+
+
+class TruckTests(unittest.TestCase):
+    def setUp(self):
+        self.truck = Truck(10, 1)
+
+    def test_if_truck_is_instanced_properly(self):
+        self.assertEqual(self.truck.fuel_quantity, 10)
+        self.assertEqual(self.truck.fuel_consumption, 1)
+
+    def test_if_fuel_is_calculated_properly_after_driving_truck_possible(self):
+        fuel_quantity = 100
+        fuel_consumption = 10
+        truck = Truck(fuel_quantity, fuel_consumption)
+        distance = 5
+        truck.drive(distance)
+        fuel_left = fuel_quantity - (distance * (fuel_consumption + 1.6))
+        self.assertEqual(fuel_left, truck.fuel_quantity)
+
+    def test_if_fuel_is_calculated_properly_after_driving_truck_impossible(self):
+        self.truck.drive(1000)
+        self.assertEqual(self.truck.fuel_quantity, 10)
+
+    def test_if_refueling_is_working_truck(self):
+        self.truck.refuel(2)
+        self.assertEqual(self.truck.fuel_quantity, 11.9)
+
+
+if __name__ == "__main__":
+    unittest.main()
