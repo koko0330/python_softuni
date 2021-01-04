@@ -1,0 +1,37 @@
+import unittest
+
+
+class CatTests(unittest.TestCase):
+    def setUp(self):
+        self.cat = Cat("Koko")
+
+    def test_cat_size_incrased_after_eating(self):
+        old_size = self.cat.size
+        self.cat.eat()
+        self.assertEqual(self.cat.size - old_size, 1)
+
+    def test_cat_is_fed_after_eating(self):
+        eaten = self.cat.fed
+        self.cat.eat()
+        self.assertNotEqual(eaten, self.cat.fed)
+
+    def test_if_already_eaten_rasies_an_error(self):
+        self.cat.fed = True
+        with self.assertRaises(Exception):
+            self.cat.eat()
+
+    def test_if_cat_cannot_sleep_if_not_fed_raises_an_error(self):
+        self.cat.fed = False
+        with self.assertRaises(Exception):
+            self.cat.sleep()
+
+    def test_that_cat_is_not_sleepy_after_sleeping(self):
+        self.cat.sleepy = True
+        slept = self.cat.sleepy
+        self.cat.fed = True
+        self.cat.sleep()
+        self.assertNotEqual(slept, self.cat.sleepy)
+
+
+if __name__ == "__main__":
+    unittest.main()
