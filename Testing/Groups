@@ -1,0 +1,57 @@
+import unittest
+
+
+class GroupsTestCase(unittest.TestCase):
+    def setUp(self):
+        self.person_one = Person("Konstantin", "Kurdaliev")
+        self.person_two = Person("Stoqn", "Ivanov")
+
+
+class TestPerson(GroupsTestCase):
+    def test_if_person_is_instanced_properly(self):
+        self.assertEqual(self.person_one.name, "Konstantin")
+        self.assertEqual(self.person_one.surname, "Kurdaliev")
+        self.assertEqual(self.person_two.name, "Stoqn")
+        self.assertEqual(self.person_two.surname, "Ivanov")
+
+    def test_if_changing_surname_works_if_other_is_class(self):
+        person_three = self.person_one + self.person_two
+        self.assertEqual(
+            (person_three.name, person_three.surname),
+            ("Konstantin", "Ivanov")
+        )
+
+    def test_if_repr_works_properly(self):
+        self.assertEqual(self.person_one.__repr__(), "Konstantin Kurdaliev")
+
+
+class TestGroup(GroupsTestCase):
+    def setUp(self):
+        super().setUp()
+        self.group = Group("debili", [self.person_one, self.person_two])
+
+    def test_if_person_is_instanced_properly(self):
+        self.assertEqual(self.group.name, "debili")
+        self.assertEqual(self.group.people, [self.person_one, self.person_two])
+
+    def test_if_group_len_is_calculated_properly(self):
+        self.assertEqual(len(self.group), 2)
+
+    def test_if_get_item_works(self):
+        self.assertEqual(self.group[0], "Person 0: Konstantin Kurdaliev")
+
+    def test_str(self):
+        self.assertEqual("Group debili with members Konstantin Kurdaliev, Stoqn Ivanov", str(self.group))
+
+    def test_iteration_should_return_repr_of_people(self):
+        self.assertEqual(list(self.group), [
+            'Person 0: Konstantin Kurdaliev',
+            'Person 1: Stoqn Ivanov'
+        ])
+
+    def test_adding_groups_should_return_all_members(self):
+        new_group = self.group + self.group
+        self.assertEqual(len(new_group), 4)
+
+if __name__ == '__main__':
+    unittest.main()
