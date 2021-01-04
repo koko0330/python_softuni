@@ -1,0 +1,55 @@
+import unittest
+
+
+class IntegerListTests(unittest.TestCase):
+    def setUp(self):
+        self.integer_list = IntegerList([])
+
+    def test_adding_to_the_list(self):
+        self.assertEqual(self.integer_list.add(42), [42])
+
+    def test_if_adding_non_integer_raises_error(self):
+        self.assertRaises(ValueError, self.integer_list.add, "koko")
+
+    def test_remove_index_from_list(self):
+        self.integer_list.add(1)
+        self.assertEqual(self.integer_list.remove_index(0), 1)
+
+    def test_if_removing_index_out_of_range_raises_error(self):
+        self.integer_list.add(1)
+        self.assertRaises(IndexError, self.integer_list.remove_index, 2)
+
+    def test_if_init_gets_only_integers_and_stores_them(self):
+        list_to_test = IntegerList("baba", 1, "dqdo")
+        self.assertEqual(list_to_test.get_data(), [1])
+
+    def test_if_get_returns_proper_elements(self):
+        self.integer_list.add(1)
+        self.assertEqual(self.integer_list.get(0), 1)
+
+    def test_if_get_throws_an_error_if_index_out_of_range(self):
+        self.integer_list.add(1)
+        self.assertRaises(IndexError, self.integer_list.get, 1)
+
+    def test_if_inserting_an_element_works(self):
+        self.integer_list.add(1)
+        self.integer_list.insert(0, 42)
+        self.assertEqual(self.integer_list.get_data(), [42, 1])
+
+    def test_if_inserting_element_raises_index_error(self):
+        self.assertRaises(IndexError, self.integer_list.insert, 0, 1)
+        self.integer_list.add(1)
+        self.assertRaises(ValueError, self.integer_list.insert, 0, "baba")
+
+    def test_it_get_biggest_works(self):
+        self.integer_list.add(1)
+        self.integer_list.add(4)
+        self.assertEqual(self.integer_list.get_biggest(), 4)
+
+    def test_if_access_by_index_works(self):
+        self.integer_list.add(1)
+        self.assertEqual(self.integer_list.get_index(1), 0)
+
+
+if __name__ == "__main__":
+    unittest.main()
