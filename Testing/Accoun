@@ -1,0 +1,95 @@
+import unittest
+
+
+class AccountTests(unittest.TestCase):
+    def setUp(self):
+        self.account_one = Account("Konstantin", 0)
+        self.account_two = Account("Boris", 1)
+
+    def test_if_account_is_instanciated_properly(self):
+        self.assertEqual(self.account_one.owner, "Konstantin")
+        self.assertEqual(self.account_one.amount, 0)
+
+    def test_if_adding_transcation_works(self):
+        self.account_one._transactions = []
+        amount = 10
+        self.account_one.add_transaction(amount)
+        self.assertEqual(self.account_one._transactions, [10])
+
+    def test_if_adding_non_integer_to_transactions_throwns_an_error(self):
+        self.account_one._transactions = []
+        with self.assertRaises(ValueError):
+            self.account_one.add_transaction("whatever")
+
+    def test_if_balance_is_calculated_properly(self):
+        self.account_one._transactions = [10, 20]
+        balance = self.account_one.balance
+        self.assertEqual(balance, 30)
+
+    def test_str_representation_of_account(self):
+        self.assertEqual(str(self.account_one), "Account of Konstantin with starting amount: 0")
+
+    def test_repr_of_account(self):
+        self.assertEqual(self.account_one.__repr__(), "Account(Konstantin, 0)")
+
+    def test_validating_transaction_should_be_working(self):
+        transaction = 20
+        self.assertEqual(self.account_one.validate_transaction(self.account_one, transaction), "New balance: 20")
+
+    def test_validating_transaction_should_throw_an_error(self):
+        transaction = -20
+        with self.assertRaises(ValueError):
+            self.account_one.validate_transaction(self.account_one, transaction)
+
+    def test_len_transactions_list(self):
+        self.account_one._transactions = [20, 30, 40]
+        self.assertEqual(self.account_one.__len__(), 3)
+
+    def test_returing_an_item_from_transactions_list(self):
+        self.account_one._transactions = [20, 30, 40]
+        self.assertEqual(self.account_one.__getitem__(0), 20)
+
+    def test_account_comparison_by_balance(self):
+        bigger = Account("bigger", 2)
+        smaller = Account("smaller", 3)
+
+        bigger.add_transaction(2)
+
+        self.assertTrue(bigger > smaller)
+        self.assertTrue(bigger >= smaller)
+        self.assertTrue(bigger >= bigger)
+        self.assertTrue(smaller >= smaller)
+        self.assertTrue(smaller < bigger)
+        self.assertTrue(smaller <= bigger)
+        self.assertTrue(bigger <= bigger)
+        self.assertTrue(smaller <= smaller)
+        self.assertTrue(bigger == bigger)
+        self.assertTrue(bigger != smaller)
+        self.assertTrue(bigger == Account("new", 4))
+
+        self.assertFalse(bigger < smaller)
+        self.assertFalse(bigger <= smaller)
+        self.assertFalse(smaller > bigger)
+        self.assertFalse(smaller >= bigger)
+        self.assertFalse(bigger == smaller)
+        self.assertFalse(bigger == Account("new", 5))
+        self.assertFalse(bigger != bigger)
+
+    def test_adding_new_account(self):
+        owner_one = self.account_one.owner
+        owner_two = self.account_two.owner
+        new_account = self.account_one + self.account_two
+
+        self.assertEqual(new_account.owner, f"{owner_one}&{owner_two}")
+        self.assertEqual(new_account.balance, self.account_one.balance + self.account_two.balance)
+        self.assertEqual(new_account._transactions, self.account_one._transactions + self.account_two._transactions)
+
+    def test_account_reversing(self):
+        self.account_one.add_transaction(2)
+        self.account_one.add_transaction(1)
+
+        self.assertEqual(list(reversed(self.account_one)), [1, 2])
+
+
+if __name__ == '__main__':
+    unittest.main()
