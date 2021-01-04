@@ -1,0 +1,44 @@
+import unittest
+
+
+class WorkerTests(unittest.TestCase):
+    def setUp(self):
+        self.worker = Worker("Koko", 1000, 10)
+
+    def test_if_worker_is_properly_initialized(self):
+        self.assertEqual(self.worker.name, "Koko")
+        self.assertEqual(self.worker.salary, 1000)
+        self.assertEqual(self.worker.energy, 10)
+
+    def test_if_money_is_calculated_properly_when_working(self):
+        old_money = 0
+        self.worker.work()
+        self.assertEqual(self.worker.money - old_money, self.worker.salary)
+
+    def test_if_energy_is_decreased_when_working(self):
+        old_energy = self.worker.energy
+        self.worker.work()
+        self.assertEqual(self.worker.energy - old_energy, -1)
+
+    def test_if_rest_is_increased_properly(self):
+        old_energy = self.worker.energy
+        self.worker.rest()
+        self.assertEqual(self.worker.energy - old_energy, 1)
+
+    def test_if_error_is_raised_when_energy_is_zero(self):
+        self.worker.energy = 0
+        with self.assertRaises(Exception):
+            self.worker.work()
+
+    def test_if_error_is_raised_when_energy_is_negative(self):
+        self.worker.energy = -43
+        with self.assertRaises(Exception):
+            self.worker.work()
+
+    def test_if_get_info_is_correct(self):
+        info = self.worker.get_info()
+        self.assertEqual(info, "Koko has saved 0 money.")
+
+
+if __name__ == "__main__":
+    unittest.main()
